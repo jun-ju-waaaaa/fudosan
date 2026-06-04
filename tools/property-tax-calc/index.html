@@ -118,7 +118,16 @@
     color: var(--clr-primary-dark);
     background: rgba(27,84,144,0.08);
   }
-  @media (prefers-color-scheme: dark) { .origin-btn.active { color: var(--clr-primary-dark); } }
+  @media (prefers-color-scheme: dark) {
+    .origin-btn.active {
+      background: rgba(107,168,224,0.14);
+      border-color: var(--clr-primary-dark);
+    }
+  }
+  [data-theme="dark"] .origin-btn.active {
+    background: rgba(107,168,224,0.14);
+    border-color: var(--clr-primary-dark);
+  }
 
   /* 金額入力ラッパー */
   .amount-wrap {
@@ -195,6 +204,8 @@
     transition: border-color 0.2s;
   }
   .result-col.has-value { border-color: var(--clr-primary); }
+  @media (prefers-color-scheme: dark) { .result-col.has-value { border-color: var(--clr-primary-dark); } }
+  [data-theme="dark"] .result-col.has-value { border-color: var(--clr-primary-dark); }
   .col-header {
     padding: 8px 12px;
     font-size: 12px;
@@ -212,6 +223,10 @@
   }
   [data-theme="dark"] .seller-col .col-header { background: #3d2800; color: #ffb74d; }
   [data-theme="dark"] .buyer-col .col-header  { background: #1b3a1b; color: #81c784; }
+  @media (prefers-color-scheme: dark) {
+    .seller-col .col-header { background: #3d2800; color: #ffb74d; }
+    .buyer-col .col-header  { background: #1b3a1b; color: #81c784; }
+  }
   .col-period {
     font-size: 11px;
     color: var(--clr-text-muted);

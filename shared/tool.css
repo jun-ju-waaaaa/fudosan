@@ -72,6 +72,14 @@
   outline: none;
   border-color: var(--clr-primary);
 }
+@media (prefers-color-scheme: dark) {
+  .input-group input:focus,
+  .input-group select:focus,
+  .input-group textarea:focus { border-color: var(--clr-primary-dark); }
+}
+[data-theme="dark"] .input-group input:focus,
+[data-theme="dark"] .input-group select:focus,
+[data-theme="dark"] .input-group textarea:focus { border-color: var(--clr-primary-dark); }
 
 .input-group textarea {
   resize: vertical;
@@ -109,6 +117,16 @@
   background: var(--clr-surface);
   color: var(--clr-primary-dark);
   box-shadow: 0 1px 4px var(--clr-shadow);
+}
+@media (prefers-color-scheme: dark) {
+  .tab-btn.active {
+    background: rgba(107,168,224,0.12);
+    box-shadow: 0 0 0 1px rgba(107,168,224,0.25);
+  }
+}
+[data-theme="dark"] .tab-btn.active {
+  background: rgba(107,168,224,0.12);
+  box-shadow: 0 0 0 1px rgba(107,168,224,0.25);
 }
 
 .tab-panel { display: none; }
@@ -160,6 +178,8 @@
 .result-card.has-value {
   border-color: var(--clr-primary);
 }
+@media (prefers-color-scheme: dark) { .result-card.has-value { border-color: var(--clr-primary-dark); } }
+[data-theme="dark"] .result-card.has-value { border-color: var(--clr-primary-dark); }
 
 .result-label {
   font-size: 12px;
