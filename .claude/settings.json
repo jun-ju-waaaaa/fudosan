@@ -1,0 +1,55 @@
+{
+  "permissions": {
+    "disableBypassPermissionsMode": "disable",
+    "disableAutoMode": "disable",
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(rm -rf /)",
+      "Bash(sudo *)",
+      "Bash(chmod *)",
+      "Bash(chown *)",
+      "Bash(dd *)",
+      "Bash(mkfs *)",
+      "Bash(curl *)",
+      "Bash(wget *)",
+      "Bash(nc *)",
+      "Bash(telnet *)",
+      "Bash(bash -c *)",
+      "Bash(sh -c *)",
+      "Bash(zsh -c *)",
+      "Bash(python -c *)",
+      "Bash(python3 -c *)",
+      "Bash(node -e *)",
+      "Bash(eval *)",
+      "Bash(cat .env*)",
+      "Bash(cat ~/.ssh/*)",
+      "Bash(cat ~/.aws/*)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.config/**)",
+      "Edit(./.env)",
+      "Edit(./.env.*)",
+      "Edit(~/.ssh/**)",
+      "Edit(~/.aws/**)"
+    ],
+    "ask": [
+      "Bash(git push *)",
+      "Bash(git reset --hard *)",
+      "Bash(mv *)",
+      "Bash(npm publish *)",
+      "Bash(docker *)"
+    ],
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(ls *)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "WebFetch(domain:code.claude.com)"
+    ]
+  }
+}
