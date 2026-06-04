@@ -34,6 +34,11 @@
 - OG tags / JSON-LD の URL も `fudosan-tools.com` に統一
 - 0-tools.com / G-S6LH1TXVP8（0-tools GA4）は使用しない
 
+## Git 運用ルール
+
+- **`git push` は必ずユーザーに確認してから実行する**（確認なしのプッシュ禁止）
+- ブランチへのマージ・main への反映も事前に許可を得る
+
 ## セキュリティ
 
 - `innerHTML` にユーザー入力を展開する場合は必ず `esc()` でエスケープ
