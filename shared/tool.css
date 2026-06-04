@@ -178,9 +178,7 @@
   word-break: break-all;
 }
 
-[data-theme="dark"] .result-value {
-  color: var(--clr-primary);
-}
+@media (prefers-color-scheme: dark) { .result-value { color: var(--clr-primary-dark); } }
 
 .result-sub {
   font-size: 13px;
@@ -372,4 +370,4 @@
 
 .related-card:hover { transform: translateY(-2px); }
 
-[data-theme="dark"] .related-card { color: var(--clr-primary); }
+@media (prefers-color-scheme: dark) { .related-card { color: var(--clr-primary-dark); } }

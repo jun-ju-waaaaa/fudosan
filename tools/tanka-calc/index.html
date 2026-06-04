@@ -73,6 +73,8 @@
     color: var(--clr-primary);
     margin-bottom: 4px;
   }
+  @media (prefers-color-scheme: dark) { .term-item dt { color: var(--clr-primary-dark); } }
+  [data-theme="dark"] .term-item dt { color: var(--clr-primary-dark); }
   .term-item dd {
     font-size: 13px;
     line-height: 1.6;
@@ -112,6 +114,8 @@
     color: var(--clr-primary);
     touch-action: manipulation;
   }
+  @media (prefers-color-scheme: dark) { .about-section summary { color: var(--clr-primary-dark); } }
+  [data-theme="dark"] .about-section summary { color: var(--clr-primary-dark); }
   .about-section p {
     font-size: 13px;
     line-height: 1.7;

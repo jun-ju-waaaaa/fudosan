@@ -84,6 +84,8 @@
     color: var(--clr-primary);
     touch-action: manipulation;
   }
+  @media (prefers-color-scheme: dark) { .about-section summary { color: var(--clr-primary-dark); } }
+  [data-theme="dark"] .about-section summary { color: var(--clr-primary-dark); }
   .about-section p {
     font-size: 13px;
     line-height: 1.7;

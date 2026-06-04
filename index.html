@@ -94,7 +94,7 @@
     transform: translateY(-3px);
     box-shadow: 0 6px 16px var(--clr-shadow);
   }
-  [data-theme="dark"] .tool-card { color: var(--clr-primary); }
+  @media (prefers-color-scheme: dark) { .tool-card { color: var(--clr-primary-dark); } }
   .tool-card__icon {
     font-size: 32px;
     margin-bottom: 10px;
@@ -129,6 +129,9 @@
   }
   .site-intro h2:first-of-type { margin-top: 0; }
   .site-intro p { margin: 0 0 10px; }
+  .site-intro a { color: var(--clr-primary); }
+  @media (prefers-color-scheme: dark) { .site-intro a { color: #6ba8e0; } }
+  [data-theme="dark"] .site-intro a { color: #6ba8e0; }
 </style>
 </head>
 <body>

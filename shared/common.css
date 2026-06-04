@@ -27,6 +27,7 @@
     --clr-text-muted: #9aa3b5;
     --clr-border: #2d3348;
     --clr-shadow: rgba(0,0,0,0.3);
+    --clr-primary-dark: #6ba8e0;
   }
 }
 
@@ -37,6 +38,7 @@
   --clr-text-muted: #9aa3b5;
   --clr-border: #2d3348;
   --clr-shadow: rgba(0,0,0,0.3);
+  --clr-primary-dark: #6ba8e0;
 }
 
 [data-theme="light"] {
@@ -179,6 +181,13 @@ body {
 }
 
 .breadcrumb a:hover { text-decoration: underline; }
+
+@media (prefers-color-scheme: dark) {
+  .breadcrumb a,
+  .site-footer__links a { color: #6ba8e0; }
+}
+[data-theme="dark"] .breadcrumb a,
+[data-theme="dark"] .site-footer__links a { color: #6ba8e0; }
 
 /* =============================================
    広告スロット（CLSゼロ保証）

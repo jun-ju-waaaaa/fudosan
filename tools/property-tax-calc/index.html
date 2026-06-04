@@ -118,7 +118,7 @@
     color: var(--clr-primary-dark);
     background: rgba(27,84,144,0.08);
   }
-  [data-theme="dark"] .origin-btn.active { color: var(--clr-primary); }
+  @media (prefers-color-scheme: dark) { .origin-btn.active { color: var(--clr-primary-dark); } }
 
   /* 金額入力ラッパー */
   .amount-wrap {
@@ -262,7 +262,7 @@
     text-align: right;
     word-break: break-all;
   }
-  [data-theme="dark"] .col-total strong { color: var(--clr-primary); }
+  @media (prefers-color-scheme: dark) { .col-total strong { color: var(--clr-primary-dark); } }
 
   /* 計算根拠 */
   .calc-detail {
@@ -291,7 +291,7 @@
     transition: transform 0.2s;
   }
   .calc-detail[open] summary::before { transform: rotate(90deg); }
-  [data-theme="dark"] .calc-detail summary { color: var(--clr-primary); }
+  @media (prefers-color-scheme: dark) { .calc-detail summary { color: var(--clr-primary-dark); } }
   .calc-detail-body {
     padding: 8px 14px 14px;
     border-top: 1px solid var(--clr-border);
