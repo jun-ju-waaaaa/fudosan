@@ -1,0 +1,11 @@
+{
+  "name": "不動産ツール",
+  "short_name": "不動産ツール",
+  "icons": [
+    { "src": "/favicon-32x32.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ],
+  "theme_color": "#1B5490",
+  "background_color": "#F0F4F8",
+  "display": "browser"
+}
