@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>不動産ツール — 無料の不動産計算ツール集</title>
+<link rel="canonical" href="https://fudosan-tools.com/">
+<meta name="description" content="不動産売買・賃貸に役立つ無料計算ツール集。平米・坪変換、㎡単価・坪単価計算、固定資産税の日割り精算額計算。スマホ対応・登録不要・すべて無料。">
+<meta property="og:title" content="不動産ツール — 無料の不動産計算ツール集">
+<meta property="og:description" content="不動産売買・賃貸に役立つ無料計算ツール集。平米・坪変換、㎡単価・坪単価計算、固定資産税日割り計算。スマホ対応・登録不要。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fudosan-tools.com/">
+<meta property="og:image" content="https://fudosan-tools.com/shared/og-default.png">
+<meta name="twitter:card" content="summary">
+<meta name="google-adsense-account" content="ca-pub-6769343629657319">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/shared/common.css" as="style">
+<link rel="stylesheet" href="/shared/common.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"不動産ツール","url":"https://fudosan-tools.com/","description":"不動産売買・賃貸に役立つ無料計算ツール集","inLanguage":"ja"}
+</script>
+<style>
+  .top-hero {
+    background: var(--clr-primary);
+    color: #fff;
+    text-align: center;
+    padding: 40px 16px 36px;
+  }
+  .top-hero h1 {
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0 0 10px;
+    line-height: 1.3;
+  }
+  .top-hero p {
+    font-size: 14px;
+    opacity: 0.9;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .tools-section {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 28px 16px 48px;
+  }
+  .tools-section h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--clr-text-muted);
+    margin: 0 0 16px;
+    letter-spacing: 0.03em;
+  }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (min-width: 480px) {
+    .tools-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .tool-card {
+    background: var(--clr-surface);
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    color: var(--clr-primary-dark);
+    box-shadow: 0 2px 8px var(--clr-shadow);
+    padding: 24px 12px;
+    transition: transform 0.15s, box-shadow 0.15s;
+    line-height: 1.4;
+    touch-action: manipulation;
+  }
+  .tool-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px var(--clr-shadow);
+  }
+  [data-theme="dark"] .tool-card { color: var(--clr-primary); }
+  .tool-card__icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+  .tool-card__name {
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .tool-card__desc {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--clr-text-muted);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  .site-intro {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 16px 40px;
+    font-size: 13px;
+    color: var(--clr-text-muted);
+    line-height: 1.8;
+  }
+  .site-intro h2 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--clr-text);
+    margin: 0 0 10px;
+    border-left: 4px solid var(--clr-primary);
+    padding-left: 10px;
+  }
+</style>
+</head>
+<body>
+<header id="site-header" class="site-header"></header>
+
+<div class="top-hero">
+  <h1>不動産ツール</h1>
+  <p>不動産売買・賃貸に役立つ<br>無料の計算ツール集</p>
+</div>
+
+<div class="ad-slot ad-top" aria-hidden="true"></div>
+
+<main class="tools-section">
+  <h2>ツール一覧</h2>
+  <div class="tools-grid">
+    <a class="tool-card" href="/tools/tsubo-calc/">
+      <div class="tool-card__icon">📐</div>
+      <div class="tool-card__name">平米・坪変換</div>
+      <div class="tool-card__desc">㎡⇔坪・畳<br>坪単価計算</div>
+    </a>
+    <a class="tool-card" href="/tools/tanka-calc/">
+      <div class="tool-card__icon">🏷️</div>
+      <div class="tool-card__name">㎡単価・坪単価</div>
+      <div class="tool-card__desc">価格÷面積<br>物件比較に</div>
+    </a>
+    <a class="tool-card" href="/tools/property-tax-calc/">
+      <div class="tool-card__icon">🏛️</div>
+      <div class="tool-card__name">固定資産税<br>日割り計算</div>
+      <div class="tool-card__desc">売主・買主<br>精算額を即計算</div>
+    </a>
+  </div>
+</main>
+
+<section class="site-intro">
+  <h2>不動産ツールについて</h2>
+  <p>不動産ツールは、不動産売買・賃貸・物件探しに役立つ無料の計算ツール集です。すべてのツールはブラウザ上で動作し、入力データは外部サーバーに送信されません。スマホ・PCどちらからでもご利用いただけます。</p>
+</section>
+
+<footer id="site-footer" class="site-footer"></footer>
+<script src="/shared/common.js" defer></script>
+</body>
+</html>
