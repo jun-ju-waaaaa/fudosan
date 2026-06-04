@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - '**.html'
+  workflow_dispatch:
 
 jobs:
   notify:
@@ -19,9 +20,15 @@ jobs:
         run: |
           BASE_URL="https://fudosan-tools.com"
 
-          # 変更されたHTMLファイルをURLに変換
-          URLS=$(git diff --name-only HEAD~1 HEAD -- '*.html' | while read file; do
-            # index.html → ディレクトリURL
+          # 手動実行時は全URLを送信
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            FILES=$(find . -name "*.html" -not -path "./.git/*" | sed 's|^\./||')
+          else
+            FILES=$(git diff --name-only HEAD~1 HEAD -- '*.html')
+          fi
+
+          URLS=$(echo "$FILES" | while read file; do
+            [[ -z "$file" ]] && continue
             if [[ "$file" == "index.html" ]]; then
               echo "${BASE_URL}/"
             elif [[ "$file" == */index.html ]]; then
