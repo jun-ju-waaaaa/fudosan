@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B5490">
 <title>固定資産税・都市計画税 日割り計算ツール｜不動産売買の精算額を即計算 - 不動産ツール</title>
 <link rel="canonical" href="https://fudosan-tools.com/tools/property-tax-calc/">
 <meta name="description" content="不動産売買の決済時に必要な固定資産税・都市計画税の日割り精算額を自動計算。1月1日起算・4月1日起算（関西慣習）に対応。売主・買主それぞれの負担額を瞬時に算出します。登録不要・無料。">
@@ -40,51 +41,6 @@
       "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://fudosan-tools.com/"},
         {"@type": "ListItem", "position": 2, "name": "固定資産税・都市計画税 日割り計算ツール", "item": "https://fudosan-tools.com/tools/property-tax-calc/"}
-      ]
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "固定資産税の日割り計算とは何ですか？",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "不動産売買の決済時に、売主が年間で支払っている固定資産税・都市計画税を売主と買主で日割りして精算する計算のことです。決済日を基準に、売主負担分と買主負担分をそれぞれ算出します。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "1月1日起算と4月1日起算の違いは何ですか？",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "起算日とは日割り計算の開始日のことです。1月1日起算は全国的な標準で、1月1日から12月31日を1年として計算します。4月1日起算は関西地方で慣習的に使われており、4月1日から翌年3月31日を1年として計算します。どちらを使うかは不動産会社や地域の慣習によって異なります。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "都市計画税とは何ですか？",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "都市計画税とは、市街化区域内の土地・建物に課税される地方税です。固定資産税と合わせて納付することが多く、不動産売買の際は固定資産税と同様に日割り精算されます。市街化区域外の物件には課税されないため、その場合は「都市計画税なし」を選択してください。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "計算結果はそのままコピーできますか？",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "はい、計算結果をテキスト形式でコピーできます。売主・買主それぞれの負担額と計算根拠がまとめてコピーされるため、不動産会社や司法書士との確認にそのまま使えます。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "このツールの計算結果は正確ですか？",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "一般的な日割り計算の方法に基づいた参考値です。実際の精算額は不動産会社・司法書士が作成する精算書によって決まります。端数処理の方法や慣習によって若干異なる場合があるため、必ず専門家にご確認ください。"
-          }
-        }
       ]
     },
     {
@@ -441,37 +397,15 @@
 </style>
 
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "固定資産税の日割り計算で1月1日起算と4月1日起算はどう違いますか？",
-      "acceptedAnswer": {"@type": "Answer", "text": "1月1日起算は関東・全国標準で、1月1日〜12月31日を1年として計算します。4月1日起算は関西慣習で、4月1日〜翌年3月31日を1年として計算します。どちらを使うかは不動産業者・地域の慣習により異なりますので、契約前に確認してください。"}
-    },
-    {
-      "@type": "Question",
-      "name": "決済日は売主・買主どちらの負担になりますか？",
-      "acceptedAnswer": {"@type": "Answer", "text": "一般的な慣習として、決済日は買主の負担とします。売主負担は起算日〜決済日前日、買主負担は決済日〜最終日（12月31日または3月31日）となります。"}
-    },
-    {
-      "@type": "Question",
-      "name": "うるう年の場合、何日で計算しますか？",
-      "acceptedAnswer": {"@type": "Answer", "text": "起算日が含まれる年がうるう年の場合は366日で計算します。1月1日起算なら決済年、4月1日起算なら4月1日の属する年を基準に判定します。"}
-    },
-    {
-      "@type": "Question",
-      "name": "都市計画税とは何ですか？都市計画税がない場合はどうすればよいですか？",
-      "acceptedAnswer": {"@type": "Answer", "text": "都市計画税は市街化区域内の土地・建物に課税される税金です。市街化区域外の物件や非課税区域の場合は「都市計画税なし」のチェックボックスをオンにすると、都市計画税の計算をスキップできます。"}
-    },
-    {
-      "@type": "Question",
-      "name": "計算結果の端数はどのように処理されますか？",
-      "acceptedAnswer": {"@type": "Answer", "text": "売主・買主それぞれの負担額は円未満を切り捨てで計算します。切り捨てにより合計が年額より1円少なくなる場合、その差額は買主側に加算します。"}
-    }
-  ]
-}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+  {"@type":"Question","name":"1月1日起算と4月1日起算はどちらを使えばよいですか？","acceptedAnswer":{"@type":"Answer","text":"一般的に関東・全国標準は1月1日起算、関西（大阪・兵庫・京都など）は4月1日起算の慣習があります。不動産会社や司法書士に事前に確認してください。"}},
+  {"@type":"Question","name":"決済日は売主・買主どちらの負担になりますか？","acceptedAnswer":{"@type":"Answer","text":"本ツールでは決済日は買主負担として計算しています（売主負担は起算日〜決済日前日）。契約書や慣習によって異なる場合があります。"}},
+  {"@type":"Question","name":"都市計画税がない場合はどうすればよいですか？","acceptedAnswer":{"@type":"Answer","text":"市街化区域外の物件や都市計画税が課税されない地域では、「都市計画税なし」チェックボックスをオンにしてください。固定資産税のみで計算します。"}},
+  {"@type":"Question","name":"うるう年の場合は何日で割りますか？","acceptedAnswer":{"@type":"Answer","text":"1月1日起算の場合は決済年が、4月1日起算の場合は4月1日の属する年がうるう年かどうかで365日または366日を使います。"}},
+  {"@type":"Question","name":"端数（1円未満）はどうなりますか？","acceptedAnswer":{"@type":"Answer","text":"売主・買主それぞれの計算結果は円未満切り捨てです。切り捨てにより合計が年額より1円少なくなる場合、差額（1円）を買主負担に加算して調整します。"}},
+  {"@type":"Question","name":"固定資産税の日割り計算とは何ですか？","acceptedAnswer":{"@type":"Answer","text":"不動産売買の決済時に、売主が年間で支払っている固定資産税・都市計画税を売主と買主で日割りして精算する計算のことです。決済日を基準に、売主負担分と買主負担分をそれぞれ算出します。"}},
+  {"@type":"Question","name":"固定資産税の金額はどこで確認できますか？","acceptedAnswer":{"@type":"Answer","text":"毎年4〜6月頃に届く「固定資産税・都市計画税納税通知書」に記載されています。不動産売買の場合は売主から通知書のコピーを受け取るか、不動産会社を通じて金額を確認してください。"}}
+]}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"HowTo","name":"固定資産税・都市計画税の日割り精算額を計算する方法","description":"不動産売買の決済時に発生する固定資産税・都市計画税の日割り精算額を計算する手順","totalTime":"PT1M","tool":{"@type":"HowToTool","name":"不動産ツール 固定資産税・都市計画税 日割り計算ツール"},"step":[{"@type":"HowToStep","position":1,"name":"起算日を選択","text":"1月1日起算（関東・全国標準）か4月1日起算（関西慣習）を選択します。"},{"@type":"HowToStep","position":2,"name":"決済日・税額を入力","text":"決済日、固定資産税年額、都市計画税年額を入力します。都市計画税がない場合はチェックボックスをオンにします。"},{"@type":"HowToStep","position":3,"name":"精算額を確認","text":"売主負担額・買主負担額が即時表示されます。「計算根拠を表示」で詳細な計算内訳を確認できます。"}]}
