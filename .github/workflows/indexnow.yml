@@ -1,0 +1,49 @@
+name: IndexNow
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.html'
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Collect changed URLs
+        id: urls
+        run: |
+          BASE_URL="https://fudosan-tools.com"
+
+          # 変更されたHTMLファイルをURLに変換
+          URLS=$(git diff --name-only HEAD~1 HEAD -- '*.html' | while read file; do
+            # index.html → ディレクトリURL
+            if [[ "$file" == "index.html" ]]; then
+              echo "${BASE_URL}/"
+            elif [[ "$file" == */index.html ]]; then
+              dir=$(dirname "$file")
+              echo "${BASE_URL}/${dir}/"
+            else
+              echo "${BASE_URL}/${file}"
+            fi
+          done | sort -u | jq -R . | jq -s .)
+
+          echo "urls=$URLS" >> $GITHUB_OUTPUT
+          echo "Changed URLs: $URLS"
+
+      - name: Submit to IndexNow
+        if: steps.urls.outputs.urls != '[]' && steps.urls.outputs.urls != ''
+        run: |
+          curl -s -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d '{
+              "host": "fudosan-tools.com",
+              "key": "${{ secrets.INDEXNOW_KEY }}",
+              "keyLocation": "https://fudosan-tools.com/${{ secrets.INDEXNOW_KEY }}.txt",
+              "urlList": ${{ steps.urls.outputs.urls }}
+            }'
+          echo "IndexNow submission complete"
