@@ -218,8 +218,8 @@
 }
 
 .btn-copy:hover {
-  border-color: var(--clr-primary);
-  color: var(--clr-primary);
+  border-color: var(--clr-primary-dark);
+  color: var(--clr-primary-dark);
 }
 
 /* =============================================
@@ -254,7 +254,7 @@
   transition: border-color 0.15s;
 }
 
-.btn-secondary:hover { border-color: var(--clr-primary); color: var(--clr-primary); }
+.btn-secondary:hover { border-color: var(--clr-primary-dark); color: var(--clr-primary-dark); }
 
 /* =============================================
    エラー表示
@@ -313,7 +313,7 @@
 .faq-q::after {
   content: '＋';
   font-size: 18px;
-  color: var(--clr-primary);
+  color: var(--clr-primary-dark);
   flex-shrink: 0;
   transition: transform 0.2s;
 }
