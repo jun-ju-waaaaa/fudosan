@@ -120,14 +120,14 @@
 }
 @media (prefers-color-scheme: dark) {
   .tab-btn.active {
-    background: var(--clr-primary-dark);
-    color: var(--clr-bg);
+    background: #ffffff;
+    color: var(--clr-primary-dark);
     box-shadow: none;
   }
 }
 [data-theme="dark"] .tab-btn.active {
-  background: var(--clr-primary-dark);
-  color: var(--clr-bg);
+  background: #ffffff;
+  color: var(--clr-primary-dark);
   box-shadow: none;
 }
 
