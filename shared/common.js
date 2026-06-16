@@ -54,6 +54,7 @@
     el.innerHTML = `
       <nav class="site-footer__links">
         <a href="/">ツール一覧</a>
+        <a href="/blog/">コラム</a>
         <a href="/about/">運営者情報</a>
         <a href="/contact/">お問い合わせ</a>
         <a href="/privacy/">プライバシーポリシー・免責事項</a>
