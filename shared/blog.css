@@ -192,17 +192,18 @@
   gap: 4px;
 }
 
-/* サムネイルプレースホルダー */
-.article-thumb-placeholder {
+/* サムネイル */
+.article-thumb {
   width: 100%;
-  aspect-ratio: 16/9;
-  background: linear-gradient(135deg, rgba(27,84,144,0.12) 0%, var(--clr-bg) 100%);
-  border-radius: var(--radius);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 56px;
-  margin: 20px 0 28px;
+  margin-bottom: 24px;
+  border-radius: 12px;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.article-thumb svg {
+  display: block;
+  width: 100%;
 }
 
 /* 目次 */
