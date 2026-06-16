@@ -165,7 +165,8 @@
   {"@type":"Question","name":"坪単価と㎡単価どちらを使うべき？","acceptedAnswer":{"@type":"Answer","text":"日本の戸建て・土地広告では坪単価が慣習的に使われます。マンションや賃貸では㎡単価も一般的です。海外物件との比較や国際的な文脈では㎡単価が適しています。"}},
   {"@type":"Question","name":"賃料の㎡単価は計算できますか？","acceptedAnswer":{"@type":"Answer","text":"はい。「価格・賃料」欄に月額賃料を入力すれば月額㎡単価・坪単価を計算できます。例：月10万円・30㎡の場合、㎡単価＝100,000÷30≈3,333円/㎡・月。物件の割安・割高比較に活用できます。"}},
   {"@type":"Question","name":"入力データはサーバーに送られますか？","acceptedAnswer":{"@type":"Answer","text":"いいえ。このツールはすべてブラウザ内のみで計算が完結します。価格・面積データが外部サーバーに送信されることは一切ありません。"}},
-  {"@type":"Question","name":"坪単価だけで物件の割安・割高を判断できますか？","acceptedAnswer":{"@type":"Answer","text":"坪単価（㎡単価）は価格÷面積の比較指標であり、立地・階数・日照・築年数・管理費・設備の差は反映されません。同じエリア・同じ築年数の物件で比較すると精度が上がります。単価は参考指標として活用し、これらの要素も総合的に判断することが重要です。"}}
+  {"@type":"Question","name":"坪単価だけで物件の割安・割高を判断できますか？","acceptedAnswer":{"@type":"Answer","text":"坪単価（㎡単価）は価格÷面積の比較指標であり、立地・階数・日照・築年数・管理費・設備の差は反映されません。同じエリア・同じ築年数の物件で比較すると精度が上がります。単価は参考指標として活用し、これらの要素も総合的に判断することが重要です。"}},
+  {"@type":"Question","name":"坪単価と面積から物件価格を逆算できますか？","acceptedAnswer":{"@type":"Answer","text":"はい。物件価格（円）＝ 坪単価（円/坪）× 坪数で逆算できます。例：坪単価150万円・20坪の場合、150万円×20＝3,000万円。㎡単価からの逆算は、㎡単価×面積（㎡）で計算できます。"}}
 ]}
 </script>
 
@@ -185,7 +186,7 @@
 
 <main class="tool-main">
   <h1>㎡単価・坪単価 計算ツール</h1>
-  <p class="tool-desc">物件価格と面積を入力するだけで㎡単価・坪単価を同時表示。㎡でも坪でも入力OK、もう一方へ自動換算。</p>
+  <p class="tool-desc">物件価格と面積を入力するだけで㎡単価・坪単価を同時表示。㎡でも坪でも入力OK、もう一方へ自動換算。坪単価・面積から物件価格を逆算することもできます。</p>
 
   <section class="tool-body" id="tool">
 
@@ -229,6 +230,32 @@
       </div>
     </div>
     <div id="formula" class="formula-note"></div>
+
+    <details style="margin-top:20px;border:1px solid var(--clr-border);border-radius:10px;padding:12px 16px;background:var(--clr-bg);">
+      <summary style="font-weight:600;font-size:14px;cursor:pointer;color:var(--clr-primary);">
+        坪単価・面積から物件価格を逆算する
+      </summary>
+      <div style="margin-top:12px;">
+        <div class="input-group">
+          <label for="rev-tanka">坪単価</label>
+          <div style="display:flex;gap:8px">
+            <input type="number" id="rev-tanka" inputmode="decimal" min="0"
+              placeholder="例：165" style="touch-action:manipulation;flex:1">
+            <select id="rev-tanka-unit" aria-label="坪単価の単位"
+              style="width:76px;padding:12px 6px;font-size:16px;border:2px solid var(--clr-border);border-radius:10px;background:var(--clr-bg);color:var(--clr-text);touch-action:manipulation">
+              <option value="man">万円</option>
+              <option value="en">円</option>
+            </select>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="rev-tsubo">坪数</label>
+          <input type="number" id="rev-tsubo" inputmode="decimal" min="0"
+            placeholder="例：18.15" style="touch-action:manipulation;">
+        </div>
+        <div id="rev-result" style="margin-top:12px;font-size:15px;font-weight:700;color:var(--clr-primary);min-height:1.5em;"></div>
+      </div>
+    </details>
 
     <div class="privacy-badge">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -307,6 +334,14 @@
     <div class="faq-item">
       <button class="faq-q">坪単価だけで物件の割安・割高を判断できますか？</button>
       <div class="faq-a">坪単価（㎡単価）は<strong>価格÷面積の比較指標</strong>であり、立地・階数・日照・築年数・管理費・設備の差は反映されません。<strong>同じエリア・同じ築年数</strong>の物件で比較すると精度が上がります。単価は参考指標として活用し、これらの要素も総合的に判断しましょう。</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">坪単価と面積から物件価格を逆算できますか？</button>
+      <div class="faq-a">
+        はい。<strong>物件価格 ＝ 坪単価（円/坪）× 坪数</strong>で逆算できます。<br>
+        例：坪単価150万円・20坪 → 物件価格3,000万円。<br>
+        ページ内の「坪単価・面積から物件価格を逆算する」欄をご利用ください。
+      </div>
     </div>
   </section>
 
@@ -406,6 +441,33 @@
 
   areaM2El.addEventListener('input', function(){ lastEdited = 'm2'; calc(); });
   areaTEl.addEventListener('input', function(){ lastEdited = 'tsubo'; calc(); });
+})();
+
+// 逆算機能
+(function(){
+  const revTanka     = document.getElementById('rev-tanka');
+  const revTankaUnit = document.getElementById('rev-tanka-unit');
+  const revTsubo     = document.getElementById('rev-tsubo');
+  const revResult    = document.getElementById('rev-result');
+
+  function calcReverse(){
+    const tankaRaw = parseFloat(revTanka.value);
+    const tsubo    = parseFloat(revTsubo.value);
+    if(isNaN(tankaRaw) || tankaRaw <= 0 || isNaN(tsubo) || tsubo <= 0){
+      revResult.textContent = '';
+      return;
+    }
+    const tanka = revTankaUnit.value === 'man' ? tankaRaw * 10000 : tankaRaw;
+    const price = tanka * tsubo;
+    const priceMan = Math.round(price / 10000);
+    revResult.textContent =
+      '物件価格：約 ' + priceMan.toLocaleString('ja-JP') + ' 万円'
+      + '（' + Math.round(price).toLocaleString('ja-JP') + ' 円）';
+  }
+
+  revTanka.addEventListener('input', calcReverse);
+  revTankaUnit.addEventListener('change', calcReverse);
+  revTsubo.addEventListener('input', calcReverse);
 })();
 </script>
 </body>
