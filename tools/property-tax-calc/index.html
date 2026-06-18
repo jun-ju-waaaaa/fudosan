@@ -919,5 +919,27 @@
   calc();
 })();
 </script>
+<script>
+(function () {
+  'use strict';
+  var timers = {};
+  ['input-fixed', 'input-city'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('input', function () {
+      clearTimeout(timers[id]);
+      timers[id] = setTimeout(function () {
+        var raw = el.value.replace(/[^\d]/g, '');
+        if (raw) {
+          gtag('event', 'tool_input_change', {
+            field_id: id,
+            field_value: raw
+          });
+        }
+      }, 800);
+    });
+  });
+})();
+</script>
 </body>
 </html>
