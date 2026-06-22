@@ -168,6 +168,50 @@
 <link rel="stylesheet" href="/shared/common.css">
 <link rel="stylesheet" href="/shared/tool.css">
 <style>
+  /* =============================================
+     PC向け2カラムレイアウト
+     ============================================= */
+  .tool-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+
+  @media (min-width: 900px) {
+    .tool-main {
+      max-width: 1100px;
+      padding: 28px 32px 40px;
+    }
+    .tool-layout {
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+  }
+
+  /* =============================================
+     左パネル：入力フォーム
+     ============================================= */
+  .panel-input {
+    background: var(--clr-surface);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: 0 2px 10px var(--clr-shadow);
+  }
+
+  .panel-input__title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--clr-text);
+    margin: 0 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--clr-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
   /* 起算日トグル */
   .origin-toggle {
     display: grid;
@@ -175,6 +219,7 @@
     gap: 8px;
     margin-bottom: 20px;
   }
+
   .origin-btn {
     padding: 12px 8px;
     font-size: 14px;
@@ -189,6 +234,7 @@
     transition: border-color 0.15s, color 0.15s, background 0.15s;
     touch-action: manipulation;
   }
+
   .origin-btn small {
     display: block;
     font-size: 11px;
@@ -196,10 +242,25 @@
     margin-top: 2px;
     opacity: 0.8;
   }
+
   .origin-btn.active {
     border-color: var(--clr-primary);
     color: #fff;
     background: var(--clr-primary);
+  }
+
+  /* 横並びフォーム行（PC用） */
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 900px) {
+    .form-row--half {
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
   }
 
   /* 金額入力ラッパー */
@@ -208,9 +269,11 @@
     display: flex;
     align-items: center;
   }
+
   .amount-wrap input {
     padding-right: 28px;
   }
+
   .amount-unit {
     position: absolute;
     right: 12px;
@@ -221,8 +284,9 @@
 
   /* チェックボックス行 */
   .check-row {
-    margin: -8px 0 16px;
+    margin: -4px 0 16px;
   }
+
   .check-label {
     display: flex;
     align-items: center;
@@ -232,12 +296,43 @@
     cursor: pointer;
     touch-action: manipulation;
   }
+
   .check-label input[type="checkbox"] {
     width: 18px;
     height: 18px;
     cursor: pointer;
     accent-color: var(--clr-primary);
     flex-shrink: 0;
+  }
+
+  /* 計算ボタン */
+  .btn-calc {
+    width: 100%;
+    padding: 16px;
+    background: var(--clr-primary);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(27, 84, 144, 0.3);
+    touch-action: manipulation;
+  }
+
+  .btn-calc:hover {
+    background: var(--clr-primary-dark);
+    box-shadow: 0 6px 16px rgba(27, 84, 144, 0.4);
+  }
+
+  .btn-calc:active {
+    transform: scale(0.98);
   }
 
   /* プライバシーバッジ */
@@ -250,115 +345,149 @@
     margin-top: 16px;
   }
 
-  /* 結果エリア */
-  .result-area {
-    margin-top: 20px;
-    border-top: 1px solid var(--clr-border);
-    padding-top: 20px;
-  }
-  .result-area-title {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--clr-text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 12px;
-  }
-  .result-cols {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-  .result-col {
-    background: var(--clr-bg);
+  /* =============================================
+     右パネル：結果表示
+     ============================================= */
+  .panel-result {
+    background: var(--clr-surface);
     border-radius: var(--radius);
-    border: 2px solid var(--clr-border);
-    overflow: hidden;
-    transition: border-color 0.2s;
+    padding: 24px;
+    box-shadow: 0 2px 10px var(--clr-shadow);
   }
-  .result-col.has-value { border-color: var(--clr-primary); }
-  @media (prefers-color-scheme: dark) { .result-col.has-value { border-color: var(--clr-primary-dark); } }
-  [data-theme="dark"] .result-col.has-value { border-color: var(--clr-primary-dark); }
-  .col-header {
-    padding: 8px 12px;
+
+  @media (min-width: 900px) {
+    .panel-result {
+      position: sticky;
+      top: 72px;
+    }
+  }
+
+  .panel-result__title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--clr-text);
+    margin: 0 0 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--clr-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* 結果テーブル */
+  .result-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .result-table thead th {
+    padding: 10px 12px;
     font-size: 12px;
     font-weight: 700;
     text-align: center;
     letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--clr-border);
   }
-  .seller-col .col-header {
+
+  .result-table thead th:first-child {
+    text-align: left;
+    color: var(--clr-text-muted);
+    width: 35%;
+  }
+
+  .result-table .th-seller {
     background: #fff4e6;
     color: #c97d00;
+    border-radius: 8px 0 0 0;
   }
-  .buyer-col .col-header {
+
+  .result-table .th-buyer {
     background: #e8f5e9;
     color: #2e7d32;
+    border-radius: 0 8px 0 0;
   }
-  [data-theme="dark"] .seller-col .col-header { background: #3d2800; color: #ffb74d; }
-  [data-theme="dark"] .buyer-col .col-header  { background: #1b3a1b; color: #81c784; }
+
+  [data-theme="dark"] .result-table .th-seller { background: #3d2800; color: #ffb74d; }
+  [data-theme="dark"] .result-table .th-buyer  { background: #1b3a1b; color: #81c784; }
   @media (prefers-color-scheme: dark) {
-    .seller-col .col-header { background: #3d2800; color: #ffb74d; }
-    .buyer-col .col-header  { background: #1b3a1b; color: #81c784; }
+    .result-table .th-seller { background: #3d2800; color: #ffb74d; }
+    .result-table .th-buyer  { background: #1b3a1b; color: #81c784; }
   }
-  .col-period {
-    font-size: 11px;
-    color: var(--clr-text-muted);
-    text-align: center;
-    padding: 4px 10px 6px;
-    border-top: 1px solid var(--clr-border);
-    line-height: 1.4;
+
+  .result-table tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--clr-border);
+    vertical-align: middle;
   }
-  .col-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 6px 12px;
-    border-top: 1px solid var(--clr-border);
-    gap: 4px;
-  }
-  .col-label {
-    font-size: 11px;
-    color: var(--clr-text-muted);
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  .col-value {
+
+  .result-table tbody td:first-child {
     font-size: 13px;
-    font-weight: 600;
-    color: var(--clr-text);
-    text-align: right;
-    word-break: break-all;
-  }
-  .col-total {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 8px 12px;
-    border-top: 2px solid var(--clr-border);
-    gap: 4px;
-  }
-  .col-total > span {
-    font-size: 11px;
-    font-weight: 700;
     color: var(--clr-text-muted);
-    white-space: nowrap;
-    flex-shrink: 0;
+    font-weight: 500;
   }
-  .col-total strong {
-    font-size: 15px;
-    color: var(--clr-primary-dark);
+
+  .result-table tbody td:not(:first-child) {
     text-align: right;
-    word-break: break-all;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--clr-text);
   }
-  @media (prefers-color-scheme: dark) { .col-total strong { color: var(--clr-primary-dark); } }
+
+  .result-table .row-period td {
+    font-size: 11px;
+    color: var(--clr-text-muted);
+    font-weight: 400;
+    padding: 6px 12px;
+    background: var(--clr-bg);
+    border-bottom: 1px solid var(--clr-border);
+  }
+
+  .result-table .row-total td {
+    border-top: 2px solid var(--clr-border);
+    border-bottom: none;
+    padding: 12px;
+    font-weight: 700;
+  }
+
+  .result-table .row-total td:first-child {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--clr-text);
+  }
+
+  .result-table .row-total td:not(:first-child) {
+    font-size: 18px;
+    color: var(--clr-primary-dark);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .result-table .row-total td:not(:first-child) { color: var(--clr-primary-dark); }
+  }
+
+  /* 結果なし時 */
+  .result-empty {
+    text-align: center;
+    padding: 40px 16px;
+    color: var(--clr-text-muted);
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .result-empty__icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+    opacity: 0.5;
+  }
 
   /* 計算根拠 */
   .calc-detail {
-    margin-top: 12px;
+    margin-top: 16px;
     border: 1px solid var(--clr-border);
     border-radius: 10px;
     overflow: hidden;
   }
+
   .calc-detail summary {
     padding: 10px 14px;
     font-size: 13px;
@@ -371,20 +500,24 @@
     gap: 6px;
     touch-action: manipulation;
   }
+
   .calc-detail summary::-webkit-details-marker { display: none; }
+
   .calc-detail summary::before {
     content: '▶';
     font-size: 10px;
     color: var(--clr-primary-dark);
     transition: transform 0.2s;
   }
+
   .calc-detail[open] summary::before { transform: rotate(90deg); }
-  @media (prefers-color-scheme: dark) { .calc-detail summary { color: var(--clr-primary-dark); } }
+
   .calc-detail-body {
     padding: 8px 14px 14px;
     border-top: 1px solid var(--clr-border);
     background: var(--clr-surface);
   }
+
   .detail-row {
     display: flex;
     justify-content: space-between;
@@ -393,17 +526,20 @@
     font-size: 12px;
     gap: 8px;
   }
+
   .detail-row > span:first-child {
     color: var(--clr-text-muted);
     white-space: nowrap;
     flex-shrink: 0;
   }
+
   .detail-row > span:last-child {
     color: var(--clr-text);
     text-align: right;
     font-weight: 600;
     word-break: break-all;
   }
+
   .detail-hr {
     border: none;
     border-top: 1px dashed var(--clr-border);
@@ -414,8 +550,54 @@
   .action-row {
     display: flex;
     gap: 8px;
-    margin-top: 12px;
+    margin-top: 16px;
     flex-wrap: wrap;
+  }
+
+  .btn-copy--lg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+    background: var(--clr-surface);
+    border: 2px solid var(--clr-primary);
+    border-radius: 10px;
+    color: var(--clr-primary);
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    touch-action: manipulation;
+  }
+
+  .btn-copy--lg:hover {
+    background: var(--clr-primary);
+    color: #fff;
+  }
+
+  .btn-reset {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: var(--clr-bg);
+    border: 2px solid var(--clr-border);
+    border-radius: 10px;
+    color: var(--clr-text-muted);
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+    touch-action: manipulation;
+  }
+
+  .btn-reset:hover {
+    border-color: var(--clr-text-muted);
+    color: var(--clr-text);
   }
 
   /* 免責文言 */
@@ -430,13 +612,103 @@
     border-left: 3px solid var(--clr-border);
   }
 
-  /* このツールについて */
+  /* 比較履歴テーブル */
+  .history-section {
+    margin-top: 20px;
+    border-top: 1px solid var(--clr-border);
+    padding-top: 16px;
+  }
+
+  .history-section__title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--clr-text-muted);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .history-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+
+  .history-table th {
+    padding: 8px 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--clr-text-muted);
+    text-align: center;
+    border-bottom: 2px solid var(--clr-border);
+    white-space: nowrap;
+  }
+
+  .history-table th:first-child { text-align: left; }
+
+  .history-table td {
+    padding: 8px 6px;
+    border-bottom: 1px solid var(--clr-border);
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+    color: var(--clr-text);
+  }
+
+  .history-table td:first-child {
+    text-align: left;
+    font-weight: 600;
+    color: var(--clr-text-muted);
+    font-size: 11px;
+  }
+
+  .history-table .ht-seller { color: #c97d00; font-weight: 600; }
+  .history-table .ht-buyer  { color: #2e7d32; font-weight: 600; }
+  [data-theme="dark"] .history-table .ht-seller { color: #ffb74d; }
+  [data-theme="dark"] .history-table .ht-buyer  { color: #81c784; }
+  @media (prefers-color-scheme: dark) {
+    .history-table .ht-seller { color: #ffb74d; }
+    .history-table .ht-buyer  { color: #81c784; }
+  }
+
+  .history-table .btn-del {
+    background: none;
+    border: none;
+    color: var(--clr-text-muted);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: color 0.15s;
+  }
+
+  .history-table .btn-del:hover { color: var(--clr-error); }
+
+  .btn-clear-history {
+    margin-top: 8px;
+    background: none;
+    border: 1px solid var(--clr-border);
+    border-radius: 6px;
+    color: var(--clr-text-muted);
+    font-size: 11px;
+    padding: 4px 10px;
+    cursor: pointer;
+    transition: color 0.15s;
+    touch-action: manipulation;
+  }
+
+  .btn-clear-history:hover { color: var(--clr-error); }
+
+  /* =============================================
+     このツールについて
+     ============================================= */
   .about-tool {
     margin-top: 36px;
     border: 1px solid var(--clr-border);
     border-radius: var(--radius);
     overflow: hidden;
   }
+
   .about-tool summary {
     padding: 14px 16px;
     font-size: 14px;
@@ -449,7 +721,9 @@
     gap: 8px;
     touch-action: manipulation;
   }
+
   .about-tool summary::-webkit-details-marker { display: none; }
+
   .about-tool summary::after {
     content: '＋';
     margin-left: auto;
@@ -457,17 +731,21 @@
     color: var(--clr-primary-dark);
     transition: transform 0.2s;
   }
+
   .about-tool[open] summary::after { transform: rotate(45deg); }
+
   .about-body {
     padding: 0 16px 16px;
     border-top: 1px solid var(--clr-border);
   }
+
   .about-body h3 {
     font-size: 13px;
     font-weight: 700;
     color: var(--clr-text);
     margin: 14px 0 6px;
   }
+
   .about-body p {
     font-size: 13px;
     color: var(--clr-text-muted);
@@ -475,12 +753,29 @@
     margin: 0;
   }
 
-  /* スマホ向け調整 */
+  /* =============================================
+     スマホ向け調整
+     ============================================= */
+  @media (max-width: 899px) {
+    .panel-result {
+      margin-top: 0;
+    }
+  }
+
   @media (max-width: 480px) {
-    .result-cols { grid-template-columns: 1fr 1fr; }
-    .col-value { font-size: 12px; }
-    .col-total strong { font-size: 14px; }
-    .col-label { font-size: 10px; }
+    .result-table {
+      font-size: 13px;
+    }
+    .result-table .row-total td:not(:first-child) {
+      font-size: 15px;
+    }
+    .result-table thead th {
+      padding: 8px 6px;
+      font-size: 11px;
+    }
+    .result-table tbody td {
+      padding: 8px 6px;
+    }
   }
 </style>
 
@@ -502,123 +797,170 @@
   <h1>固定資産税・都市計画税<br>日割り計算ツール</h1>
   <p class="tool-desc">不動産売買の決済時に発生する固定資産税・都市計画税の日割り精算額を自動計算。1月1日起算・4月1日起算（関西慣習）に対応し、売主・買主それぞれの負担額を瞬時に算出します。</p>
 
-  <section class="tool-body" id="tool" aria-label="固定資産税・都市計画税 日割り計算">
+  <div class="tool-layout" aria-label="固定資産税・都市計画税 日割り計算">
 
-    <!-- 起算日 -->
-    <div class="input-group">
-      <label>起算日</label>
-      <div class="origin-toggle" role="group" aria-label="起算日の選択">
-        <button class="origin-btn active" id="btn-jan" aria-pressed="true">
-          1月1日起算
-          <small>関東・全国標準</small>
-        </button>
-        <button class="origin-btn" id="btn-apr" aria-pressed="false">
-          4月1日起算
-          <small>関西慣習</small>
-        </button>
+    <!-- 左パネル：入力フォーム -->
+    <section class="panel-input" id="panel-input">
+      <h2 class="panel-input__title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        入力
+      </h2>
+
+      <!-- 起算日 -->
+      <div class="input-group">
+        <label>起算日</label>
+        <div class="origin-toggle" role="group" aria-label="起算日の選択">
+          <button class="origin-btn active" id="btn-jan" aria-pressed="true">
+            1月1日起算
+            <small>関東・全国標準</small>
+          </button>
+          <button class="origin-btn" id="btn-apr" aria-pressed="false">
+            4月1日起算
+            <small>関西慣習</small>
+          </button>
+        </div>
       </div>
-    </div>
 
-    <!-- 決済日 -->
-    <div class="input-group">
-      <label for="input-settlement">決済日</label>
-      <input type="date" id="input-settlement" aria-label="決済日を選択">
-    </div>
-
-    <!-- 固定資産税 -->
-    <div class="input-group">
-      <label for="input-fixed">固定資産税（年額）</label>
-      <div class="amount-wrap">
-        <input type="text" id="input-fixed" inputmode="numeric" placeholder="例：120,000"
-               autocomplete="off" aria-label="固定資産税年額" style="touch-action:manipulation">
-        <span class="amount-unit">円</span>
+      <!-- 決済日 -->
+      <div class="input-group">
+        <label for="input-settlement">決済日</label>
+        <input type="date" id="input-settlement" aria-label="決済日を選択">
       </div>
-    </div>
 
-    <!-- 都市計画税 -->
-    <div class="input-group" id="row-city">
-      <label for="input-city">都市計画税（年額）</label>
-      <div class="amount-wrap">
-        <input type="text" id="input-city" inputmode="numeric" placeholder="例：30,000"
-               autocomplete="off" aria-label="都市計画税年額" style="touch-action:manipulation">
-        <span class="amount-unit">円</span>
-      </div>
-    </div>
-
-    <!-- 都市計画税なしチェック -->
-    <div class="check-row">
-      <label class="check-label">
-        <input type="checkbox" id="chk-no-city">
-        都市計画税なし（市街化区域外 など）
-      </label>
-    </div>
-
-    <!-- エラー -->
-    <div class="error-banner" id="error-banner" role="alert"></div>
-
-    <!-- 結果エリア -->
-    <div class="result-area" id="result-area" aria-live="polite">
-      <div class="result-area-title">精算額</div>
-      <div class="result-cols">
-
-        <div class="result-col seller-col" id="col-seller">
-          <div class="col-header">売主負担</div>
-          <div class="col-period" id="r-seller-period"></div>
-          <div class="col-row">
-            <span class="col-label">固定資産税</span>
-            <span class="col-value" id="r-seller-fixed">—</span>
-          </div>
-          <div class="col-row city-only">
-            <span class="col-label">都市計画税</span>
-            <span class="col-value" id="r-seller-city">—</span>
-          </div>
-          <div class="col-total">
-            <span>合計</span>
-            <strong id="r-seller-total">—</strong>
+      <!-- 税額入力（PC横並び） -->
+      <div class="form-row form-row--half">
+        <div class="input-group">
+          <label for="input-fixed">固定資産税（年額）</label>
+          <div class="amount-wrap">
+            <input type="text" id="input-fixed" inputmode="numeric" placeholder="例：120,000"
+                   autocomplete="off" aria-label="固定資産税年額" style="touch-action:manipulation">
+            <span class="amount-unit">円</span>
           </div>
         </div>
 
-        <div class="result-col buyer-col" id="col-buyer">
-          <div class="col-header">買主負担</div>
-          <div class="col-period" id="r-buyer-period"></div>
-          <div class="col-row">
-            <span class="col-label">固定資産税</span>
-            <span class="col-value" id="r-buyer-fixed">—</span>
-          </div>
-          <div class="col-row city-only">
-            <span class="col-label">都市計画税</span>
-            <span class="col-value" id="r-buyer-city">—</span>
-          </div>
-          <div class="col-total">
-            <span>合計</span>
-            <strong id="r-buyer-total">—</strong>
+        <div class="input-group" id="row-city">
+          <label for="input-city">都市計画税（年額）</label>
+          <div class="amount-wrap">
+            <input type="text" id="input-city" inputmode="numeric" placeholder="例：30,000"
+                   autocomplete="off" aria-label="都市計画税年額" style="touch-action:manipulation">
+            <span class="amount-unit">円</span>
           </div>
         </div>
-
       </div>
 
-      <details class="calc-detail" id="calc-detail">
-        <summary>計算根拠を表示</summary>
-        <div id="calc-detail-body" class="calc-detail-body"></div>
-      </details>
-
-      <div class="action-row">
-        <button class="btn-copy" id="btn-copy" style="display:none" aria-label="精算額をコピー">
-          📋 結果をコピー
-        </button>
+      <!-- 都市計画税なしチェック -->
+      <div class="check-row">
+        <label class="check-label">
+          <input type="checkbox" id="chk-no-city">
+          都市計画税なし（市街化区域外 など）
+        </label>
       </div>
-    </div>
 
-    <!-- プライバシーバッジ -->
-    <p class="privacy-badge">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      入力データはブラウザ内のみで処理されます。サーバー送信なし。
-    </p>
+      <!-- エラー -->
+      <div class="error-banner" id="error-banner" role="alert"></div>
 
-    <!-- 免責文言 -->
-    <p class="disclaimer">本ツールの計算結果は参考値です。実際の精算額は不動産会社・司法書士にご確認ください。</p>
+      <!-- 計算ボタン -->
+      <button class="btn-calc" id="btn-calc" type="button">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/></svg>
+        精算額を計算する
+      </button>
 
-  </section>
+      <p class="privacy-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        入力データはブラウザ内のみで処理されます。サーバー送信なし。
+      </p>
+    </section>
+
+    <!-- 右パネル：結果表示 -->
+    <section class="panel-result" id="panel-result" aria-live="polite">
+      <h2 class="panel-result__title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        精算結果
+      </h2>
+
+      <!-- 結果テーブル -->
+      <div id="result-content">
+        <div class="result-empty" id="result-empty">
+          <div class="result-empty__icon">📊</div>
+          左の入力フォームに税額を入力し<br>「精算額を計算する」を押してください
+        </div>
+
+        <div id="result-filled" style="display:none">
+          <table class="result-table" id="result-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th class="th-seller">売主負担</th>
+                <th class="th-buyer">買主負担</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-period">
+                <td>負担期間</td>
+                <td id="r-seller-period">—</td>
+                <td id="r-buyer-period">—</td>
+              </tr>
+              <tr>
+                <td>固定資産税</td>
+                <td id="r-seller-fixed">—</td>
+                <td id="r-buyer-fixed">—</td>
+              </tr>
+              <tr class="city-only">
+                <td>都市計画税</td>
+                <td id="r-seller-city">—</td>
+                <td id="r-buyer-city">—</td>
+              </tr>
+              <tr class="row-total">
+                <td>合計</td>
+                <td id="r-seller-total">—</td>
+                <td id="r-buyer-total">—</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <details class="calc-detail" id="calc-detail">
+            <summary>計算根拠を表示</summary>
+            <div id="calc-detail-body" class="calc-detail-body"></div>
+          </details>
+
+          <div class="action-row">
+            <button class="btn-copy--lg" id="btn-copy" aria-label="精算額をクリップボードにコピー">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              クリップボードにコピー
+            </button>
+            <button class="btn-reset" id="btn-reset" aria-label="入力をリセット">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+              リセット
+            </button>
+          </div>
+
+          <p class="disclaimer">本ツールの計算結果は参考値です。実際の精算額は不動産会社・司法書士にご確認ください。</p>
+        </div>
+      </div>
+
+      <!-- 比較履歴 -->
+      <div class="history-section" id="history-section" style="display:none">
+        <div class="history-section__title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          計算履歴（比較用）
+        </div>
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>決済日</th>
+              <th>起算</th>
+              <th>売主合計</th>
+              <th>買主合計</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="history-body"></tbody>
+        </table>
+        <button class="btn-clear-history" id="btn-clear-history">履歴をすべて消去</button>
+      </div>
+    </section>
+
+  </div>
 
   <div class="ad-slot ad-middle" aria-hidden="true"></div>
 
@@ -700,13 +1042,19 @@
 (function () {
   'use strict';
 
+  function esc(s) {
+    return String(s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
   function isLeapYear(y) {
     return (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0;
   }
 
   function parseAmt(str) {
     if (!str) return NaN;
-    const n = parseInt(String(str).replace(/[^\d]/g, ''), 10);
+    var n = parseInt(String(str).replace(/[^\d]/g, ''), 10);
     return isNaN(n) ? NaN : n;
   }
 
@@ -718,25 +1066,27 @@
     return d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日';
   }
 
-  /* 金額入力フォーマット */
+  function fmtDateShort(d) {
+    return (d.getMonth() + 1) + '/' + d.getDate();
+  }
+
   function setupAmt(id) {
-    const el = document.getElementById(id);
+    var el = document.getElementById(id);
     if (!el) return;
     el.addEventListener('input', function () {
-      const raw = this.value.replace(/[^\d]/g, '');
-      if (!raw) { this.value = ''; calc(); return; }
-      const n = parseInt(raw, 10);
+      var raw = this.value.replace(/[^\d]/g, '');
+      if (!raw) { this.value = ''; return; }
+      var n = parseInt(raw, 10);
       if (!isNaN(n)) this.value = n.toLocaleString('ja-JP');
-      calc();
     });
   }
 
-  /* 状態 */
-  let mode = '01-01';
+  var mode = '01-01';
+  var history = [];
+  var lastCopyText = '';
 
-  /* 今日の日付をセット */
-  const today = new Date();
-  const todayStr = today.getFullYear() + '-' +
+  var today = new Date();
+  var todayStr = today.getFullYear() + '-' +
     String(today.getMonth() + 1).padStart(2, '0') + '-' +
     String(today.getDate()).padStart(2, '0');
   document.getElementById('input-settlement').value = todayStr;
@@ -748,7 +1098,6 @@
     this.setAttribute('aria-pressed', 'true');
     document.getElementById('btn-apr').classList.remove('active');
     document.getElementById('btn-apr').setAttribute('aria-pressed', 'false');
-    calc();
   });
 
   document.getElementById('btn-apr').addEventListener('click', function () {
@@ -757,7 +1106,6 @@
     this.setAttribute('aria-pressed', 'true');
     document.getElementById('btn-jan').classList.remove('active');
     document.getElementById('btn-jan').setAttribute('aria-pressed', 'false');
-    calc();
   });
 
   /* 都市計画税チェック */
@@ -766,53 +1114,75 @@
     document.querySelectorAll('.city-only').forEach(function (el) {
       el.style.display = this.checked ? 'none' : '';
     }.bind(this));
-    calc();
   });
 
-  /* 決済日 */
-  document.getElementById('input-settlement').addEventListener('change', calc);
-
-  /* 金額入力 */
   setupAmt('input-fixed');
   setupAmt('input-city');
 
   /* エラー表示 */
   function showError(msg) {
-    const el = document.getElementById('error-banner');
+    var el = document.getElementById('error-banner');
     el.textContent = msg;
     el.classList.add('show');
-    document.getElementById('btn-copy').style.display = 'none';
-    document.getElementById('col-seller').classList.remove('has-value');
-    document.getElementById('col-buyer').classList.remove('has-value');
-    ['r-seller-fixed', 'r-seller-city', 'r-seller-total',
-     'r-buyer-fixed', 'r-buyer-city', 'r-buyer-total'].forEach(function (id) {
-      const e = document.getElementById(id);
-      if (e) e.textContent = '—';
-    });
-    document.getElementById('calc-detail-body').innerHTML = '';
+    document.getElementById('result-empty').style.display = '';
+    document.getElementById('result-filled').style.display = 'none';
   }
+
+  /* 計算ボタン */
+  document.getElementById('btn-calc').addEventListener('click', calc);
+
+  /* リセットボタン */
+  document.getElementById('btn-reset').addEventListener('click', function () {
+    document.getElementById('input-fixed').value = '';
+    document.getElementById('input-city').value = '';
+    document.getElementById('input-settlement').value = todayStr;
+    document.getElementById('chk-no-city').checked = false;
+    document.getElementById('row-city').style.display = '';
+    document.querySelectorAll('.city-only').forEach(function (el) { el.style.display = ''; });
+    mode = '01-01';
+    document.getElementById('btn-jan').classList.add('active');
+    document.getElementById('btn-jan').setAttribute('aria-pressed', 'true');
+    document.getElementById('btn-apr').classList.remove('active');
+    document.getElementById('btn-apr').setAttribute('aria-pressed', 'false');
+    document.getElementById('error-banner').classList.remove('show');
+    document.getElementById('result-empty').style.display = '';
+    document.getElementById('result-filled').style.display = 'none';
+  });
+
+  /* コピーボタン */
+  document.getElementById('btn-copy').addEventListener('click', function () {
+    if (lastCopyText && window.FudosanTools) {
+      window.FudosanTools.copyText(lastCopyText);
+    }
+  });
+
+  /* 履歴消去 */
+  document.getElementById('btn-clear-history').addEventListener('click', function () {
+    history = [];
+    renderHistory();
+  });
 
   /* メイン計算 */
   function calc() {
     document.getElementById('error-banner').classList.remove('show');
 
-    const settlementVal = document.getElementById('input-settlement').value;
+    var settlementVal = document.getElementById('input-settlement').value;
     if (!settlementVal) { showError('決済日を入力してください'); return; }
 
-    const settlement = new Date(settlementVal + 'T00:00:00');
+    var settlement = new Date(settlementVal + 'T00:00:00');
     if (isNaN(settlement.getTime())) { showError('有効な日付を入力してください'); return; }
 
-    const fixedAnnual = parseAmt(document.getElementById('input-fixed').value);
+    var fixedAnnual = parseAmt(document.getElementById('input-fixed').value);
     if (isNaN(fixedAnnual) || fixedAnnual <= 0) {
       showError('固定資産税（年額）を正しく入力してください');
       return;
     }
 
-    const noCityTax = document.getElementById('chk-no-city').checked;
-    const cityAnnual = noCityTax ? 0 : (parseAmt(document.getElementById('input-city').value) || 0);
+    var noCityTax = document.getElementById('chk-no-city').checked;
+    var cityAnnual = noCityTax ? 0 : (parseAmt(document.getElementById('input-city').value) || 0);
 
-    const sYear = settlement.getFullYear();
-    const sMonth = settlement.getMonth() + 1;
+    var sYear = settlement.getFullYear();
+    var sMonth = settlement.getMonth() + 1;
 
     var startDate, endDate, totalDays, startLabel, endLabel, startYear;
 
@@ -832,8 +1202,8 @@
       endLabel   = (startYear + 1) + '年3月31日';
     }
 
-    const sellerDays = Math.round((settlement - startDate) / 86400000);
-    const buyerDays  = totalDays - sellerDays;
+    var sellerDays = Math.round((settlement - startDate) / 86400000);
+    var buyerDays  = totalDays - sellerDays;
 
     if (sellerDays < 0 || buyerDays < 0) {
       showError('決済日が計算期間外です。起算日の設定を確認してください');
@@ -857,47 +1227,53 @@
     sellerEnd.setDate(sellerEnd.getDate() - 1);
 
     /* 結果表示 */
-    document.getElementById('r-seller-period').textContent =
-      sellerDays > 0 ? startLabel + ' 〜 ' + fmtDate(sellerEnd) + '（' + sellerDays + '日）' : '—';
-    document.getElementById('r-buyer-period').textContent =
-      buyerDays > 0 ? fmtDate(settlement) + ' 〜 ' + endLabel + '（' + buyerDays + '日）' : '—';
-    document.getElementById('r-seller-fixed').textContent = fmtYen(fixed.seller);
-    document.getElementById('r-seller-city').textContent  = noCityTax ? '—' : fmtYen(city.seller);
-    document.getElementById('r-seller-total').textContent = fmtYen(sellerTotal);
-    document.getElementById('r-buyer-fixed').textContent  = fmtYen(fixed.buyer);
-    document.getElementById('r-buyer-city').textContent   = noCityTax ? '—' : fmtYen(city.buyer);
-    document.getElementById('r-buyer-total').textContent  = fmtYen(buyerTotal);
-    document.getElementById('col-seller').classList.add('has-value');
-    document.getElementById('col-buyer').classList.add('has-value');
+    document.getElementById('result-empty').style.display = 'none';
+    document.getElementById('result-filled').style.display = '';
+
+    var sellerPeriod = sellerDays > 0
+      ? fmtDateShort(startDate) + '〜' + fmtDateShort(sellerEnd) + '（' + sellerDays + '日）'
+      : '—';
+    var buyerPeriod = buyerDays > 0
+      ? fmtDateShort(settlement) + '〜' + fmtDateShort(endDate) + '（' + buyerDays + '日）'
+      : '—';
+
+    document.getElementById('r-seller-period').textContent = sellerPeriod;
+    document.getElementById('r-buyer-period').textContent  = buyerPeriod;
+    document.getElementById('r-seller-fixed').textContent  = fmtYen(fixed.seller);
+    document.getElementById('r-seller-city').textContent   = noCityTax ? '—' : fmtYen(city.seller);
+    document.getElementById('r-seller-total').textContent  = fmtYen(sellerTotal);
+    document.getElementById('r-buyer-fixed').textContent   = fmtYen(fixed.buyer);
+    document.getElementById('r-buyer-city').textContent    = noCityTax ? '—' : fmtYen(city.buyer);
+    document.getElementById('r-buyer-total').textContent   = fmtYen(buyerTotal);
 
     /* 計算根拠 */
     var dailyFixed = (fixedAnnual / totalDays).toFixed(2);
     var detailHtml =
-      '<div class="detail-row"><span>起算日</span><span>' + startLabel + '</span></div>' +
-      '<div class="detail-row"><span>最終日</span><span>' + endLabel + '</span></div>' +
+      '<div class="detail-row"><span>起算日</span><span>' + esc(startLabel) + '</span></div>' +
+      '<div class="detail-row"><span>最終日</span><span>' + esc(endLabel) + '</span></div>' +
       '<div class="detail-row"><span>1年の日数</span><span>' + totalDays + '日</span></div>' +
-      '<div class="detail-row"><span>決済日</span><span>' + fmtDate(settlement) + '</span></div>' +
+      '<div class="detail-row"><span>決済日</span><span>' + esc(fmtDate(settlement)) + '</span></div>' +
       '<hr class="detail-hr">' +
-      '<div class="detail-row"><span>売主負担期間</span><span>' + startLabel + ' 〜 ' + fmtDate(sellerEnd) + '</span></div>' +
+      '<div class="detail-row"><span>売主負担期間</span><span>' + esc(startLabel) + ' 〜 ' + esc(fmtDate(sellerEnd)) + '</span></div>' +
       '<div class="detail-row"><span>売主負担日数</span><span>' + sellerDays + '日</span></div>' +
-      '<div class="detail-row"><span>買主負担期間</span><span>' + fmtDate(settlement) + ' 〜 ' + endLabel + '</span></div>' +
+      '<div class="detail-row"><span>買主負担期間</span><span>' + esc(fmtDate(settlement)) + ' 〜 ' + esc(endLabel) + '</span></div>' +
       '<div class="detail-row"><span>買主負担日数</span><span>' + buyerDays + '日</span></div>' +
       '<hr class="detail-hr">' +
-      '<div class="detail-row"><span>固定資産税（年額）</span><span>' + fmtYen(fixedAnnual) + '</span></div>' +
-      '<div class="detail-row"><span>1日あたり固定資産税</span><span>約' + dailyFixed + '円</span></div>';
+      '<div class="detail-row"><span>固定資産税（年額）</span><span>' + esc(fmtYen(fixedAnnual)) + '</span></div>' +
+      '<div class="detail-row"><span>1日あたり固定資産税</span><span>約' + esc(dailyFixed) + '円</span></div>';
 
     if (!noCityTax && cityAnnual > 0) {
       var dailyCity = (cityAnnual / totalDays).toFixed(2);
       detailHtml +=
-        '<div class="detail-row"><span>都市計画税（年額）</span><span>' + fmtYen(cityAnnual) + '</span></div>' +
-        '<div class="detail-row"><span>1日あたり都市計画税</span><span>約' + dailyCity + '円</span></div>';
+        '<div class="detail-row"><span>都市計画税（年額）</span><span>' + esc(fmtYen(cityAnnual)) + '</span></div>' +
+        '<div class="detail-row"><span>1日あたり都市計画税</span><span>約' + esc(dailyCity) + '円</span></div>';
     }
 
     document.getElementById('calc-detail-body').innerHTML = detailHtml;
 
     /* コピーテキスト */
     var modeLabel = mode === '01-01' ? '1月1日起算' : '4月1日起算';
-    var copyText = '【固定資産税・都市計画税 日割り精算額】\n' +
+    lastCopyText = '【固定資産税・都市計画税 日割り精算額】\n' +
       '起算：' + modeLabel + '（' + startLabel + '〜' + endLabel + '、' + totalDays + '日）\n' +
       '決済日：' + fmtDate(settlement) + '\n\n' +
       '■ 売主負担（' + sellerDays + '日分）\n' +
@@ -910,13 +1286,58 @@
       '　合計：' + fmtYen(buyerTotal) + '\n\n' +
       '※本ツールの計算結果は参考値です。実際の精算額は不動産会社・司法書士にご確認ください。';
 
-    var copyBtn = document.getElementById('btn-copy');
-    copyBtn.style.display = 'flex';
-    copyBtn.onclick = function () { window.FudosanTools.copyText(copyText); };
+    /* 履歴に追加 */
+    var historyKey = settlementVal + '_' + mode;
+    var exists = false;
+    for (var i = 0; i < history.length; i++) {
+      if (history[i].key === historyKey) { exists = true; break; }
+    }
+    if (!exists) {
+      history.push({
+        key: historyKey,
+        date: fmtDate(settlement),
+        mode: modeLabel,
+        sellerTotal: fmtYen(sellerTotal),
+        buyerTotal: fmtYen(buyerTotal)
+      });
+      if (history.length > 10) history.shift();
+      renderHistory();
+    }
   }
 
-  /* 初回計算 */
-  calc();
+  /* 履歴描画 */
+  function renderHistory() {
+    var section = document.getElementById('history-section');
+    var body = document.getElementById('history-body');
+
+    if (history.length === 0) {
+      section.style.display = 'none';
+      body.innerHTML = '';
+      return;
+    }
+
+    section.style.display = '';
+    var html = '';
+    for (var i = history.length - 1; i >= 0; i--) {
+      var h = history[i];
+      html += '<tr>' +
+        '<td>' + esc(h.date) + '</td>' +
+        '<td>' + esc(h.mode) + '</td>' +
+        '<td class="ht-seller">' + esc(h.sellerTotal) + '</td>' +
+        '<td class="ht-buyer">' + esc(h.buyerTotal) + '</td>' +
+        '<td><button class="btn-del" data-idx="' + i + '" title="削除">✕</button></td>' +
+        '</tr>';
+    }
+    body.innerHTML = html;
+
+    body.querySelectorAll('.btn-del').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var idx = parseInt(this.getAttribute('data-idx'), 10);
+        history.splice(idx, 1);
+        renderHistory();
+      });
+    });
+  }
 })();
 </script>
 <script>
