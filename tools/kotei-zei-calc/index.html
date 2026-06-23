@@ -1160,6 +1160,12 @@
     var buildingAnnual = buildingKotei + buildingToshi;
     var totalAnnual = totalKotei + totalToshi;
 
+    if (typeof gtag === 'function') {
+      gtag('event', 'calculation_completed', {
+        tool_name: '固定資産税・都市計画税 計算ツール'
+      });
+    }
+
     document.getElementById('result-empty').style.display = 'none';
     document.getElementById('result-filled').style.display = '';
 
