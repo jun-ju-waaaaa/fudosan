@@ -1288,6 +1288,12 @@
       '　合計：' + fmtYen(buyerTotal) + '\n\n' +
       '※本ツールの計算結果は参考値です。実際の精算額は不動産会社・司法書士にご確認ください。';
 
+    /* GA4: 計算完了イベント */
+    gtag('event', 'calculation_completed', {
+      tool_name: '固定資産税日割り計算ツール',
+      mode: mode
+    });
+
     /* 履歴に追加 */
     var historyKey = settlementVal + '_' + mode;
     var exists = false;
