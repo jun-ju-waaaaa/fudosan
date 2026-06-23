@@ -878,6 +878,10 @@
       stepupResultsEl.style.display = 'none';
     }
 
+    gtag('event', 'calculation_completed', {
+      tool_name: 'マンション月々負担額シミュレーター'
+    });
+
     resultArea.style.display = '';
   }
 
