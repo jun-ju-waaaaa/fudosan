@@ -498,6 +498,8 @@
       <button type="button" id="add-stepup-btn">＋ 増額を追加</button>
     </div>
 
+    <button type="button" id="calc-btn" class="calc-btn" style="width:100%;margin-top:18px;padding:14px 0;font-size:16px;font-weight:700;color:#fff;background:var(--clr-primary);border:none;border-radius:10px;cursor:pointer;touch-action:manipulation;letter-spacing:0.04em;">計算する</button>
+
     <div id="error-msg" role="alert"></div>
 
     <div id="result-area" style="display:none">
@@ -695,7 +697,6 @@
   stepupToggle.addEventListener('change', function(){
     stepupArea.style.display = this.checked ? 'block' : 'none';
     if(this.checked && rowCount === 0) addStepupRow();
-    calc();
   });
 
   function addStepupRow(){
@@ -718,7 +719,6 @@
     inp1.min = '1';
     inp1.placeholder = '例：5';
     inp1.style.touchAction = 'manipulation';
-    inp1.addEventListener('input', calc);
     grp1.appendChild(lbl1);
     grp1.appendChild(inp1);
 
@@ -734,7 +734,6 @@
     inp2.min = '0';
     inp2.placeholder = '例：3000';
     inp2.style.touchAction = 'manipulation';
-    inp2.addEventListener('input', calc);
     grp2.appendChild(lbl2);
     grp2.appendChild(inp2);
 
@@ -747,7 +746,6 @@
       row.remove();
       rowCount--;
       addBtn.style.display = rowCount < 3 ? '' : 'none';
-      calc();
     });
 
     row.appendChild(grp1);
@@ -886,14 +884,13 @@
   // 半角変換（blur時）
   ['price','down-payment','years','rate','mgmt','repair','parking'].forEach(function(id){
     var el = document.getElementById(id);
-    el.addEventListener('input', calc);
     el.addEventListener('blur', function(){
       var v = toHankaku(this.value);
       if(v !== this.value) this.value = v;
     });
   });
 
-  calc();
+  document.getElementById('calc-btn').addEventListener('click', calc);
 })();
 </script>
 </body>
