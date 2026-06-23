@@ -32,9 +32,15 @@
   </url>
   <url>
     <loc>https://fudosan-tools.com/blog/</loc>
-    <lastmod>2026-06-16</lastmod>
+    <lastmod>2026-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://fudosan-tools.com/blog/property-tax-calc-guide/</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://fudosan-tools.com/blog/mansion-cost-calc-guide/</loc>
