@@ -631,6 +631,19 @@ async function processFiles(files) {
   document.getElementById("downloadNote").style.display = "block";
   document.getElementById("completeMsgText").textContent =
     "変換が完了しました（" + totalPages + "枚）";
+
+  var dlFileCount = pdfDocs.length;
+  var dlPageCount = totalPages;
+  var dlFormat = settings.ext;
+  downloadEl.addEventListener("click", function onDl() {
+    downloadEl.removeEventListener("click", onDl);
+    gtag("event", "download_pdf_to_image", {
+      file_count: dlFileCount,
+      page_count: dlPageCount,
+      output_format: dlFormat
+    });
+  });
+
   showEl("resultSection");
 }
 

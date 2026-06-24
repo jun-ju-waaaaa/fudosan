@@ -943,6 +943,10 @@ async function savePDF() {
     dlBtn.href = resultUrl;
     dlBtn.download = originalFileName.replace(/\.pdf$/i, '_rotated.pdf');
 
+    dlBtn.onclick = function() {
+      gtag('event', 'download_pdf_rotated', { page_count: pageCount });
+    };
+
     hide('processCard');
     show('resultCard');
   } catch (err) {
