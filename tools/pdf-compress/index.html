@@ -404,6 +404,32 @@
   }
   [data-theme="dark"] .about-details summary { color: var(--clr-primary-dark); }
 
+  /* サイズ比較 */
+  .size-summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px;
+    background: var(--clr-bg);
+    border-radius: 8px;
+    border: 1px solid var(--clr-border);
+    margin-bottom: 14px;
+  }
+  .size-item { text-align: center; min-width: 0; }
+  .size-label { font-size: 11px; color: var(--clr-text-muted); margin-bottom: 2px; }
+  .size-value { font-size: 15px; font-weight: 700; color: var(--clr-text); white-space: nowrap; }
+  .size-arrow { color: var(--clr-text-muted); font-size: 14px; flex-shrink: 0; }
+  .size-ratio .size-value { color: var(--clr-success); }
+  .size-increased .size-value { color: var(--clr-error); }
+  .file-size-info {
+    font-size: 12px;
+    color: var(--clr-text-muted);
+    margin-top: 2px;
+  }
+  .file-size-info .ratio { font-weight: 600; color: var(--clr-success); }
+  .file-size-info .ratio-increased { font-weight: 600; color: var(--clr-error); }
+
   /* ユーティリティ */
   .hidden { display: none !important; }
 
@@ -554,6 +580,22 @@
           <span class="complete-icon">&#10003;</span>
           <span id="completeMsgText">圧縮が完了しました！</span>
         </div>
+        <div id="sizeSummary" class="size-summary" style="display:none;">
+          <div class="size-item">
+            <div class="size-label">圧縮前</div>
+            <div class="size-value" id="sizeOriginal">-</div>
+          </div>
+          <span class="size-arrow">→</span>
+          <div class="size-item">
+            <div class="size-label">圧縮後</div>
+            <div class="size-value" id="sizeCompressed">-</div>
+          </div>
+          <span class="size-arrow">→</span>
+          <div id="sizeRatioWrap" class="size-item size-ratio">
+            <div class="size-label">圧縮率</div>
+            <div class="size-value" id="sizeRatio">-</div>
+          </div>
+        </div>
         <a id="download" class="btn btn-success btn-block" style="display:none; margin-bottom:14px;">
           圧縮後のPDFをダウンロード
         </a>
@@ -697,12 +739,36 @@ function updateProgress(percent) {
 function showEl(id) { document.getElementById(id).classList.remove("hidden"); }
 function hideEl(id) { document.getElementById(id).classList.add("hidden"); }
 
+function formatSize(bytes) {
+  if (bytes < 1024) return bytes + " B";
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+  return (bytes / (1024 * 1024)).toFixed(1) + " MB";
+}
+
+function showSizeSummary(originalSize, compressedSize) {
+  var el = document.getElementById("sizeSummary");
+  document.getElementById("sizeOriginal").textContent = formatSize(originalSize);
+  document.getElementById("sizeCompressed").textContent = formatSize(compressedSize);
+  var wrap = document.getElementById("sizeRatioWrap");
+  var ratioEl = document.getElementById("sizeRatio");
+  if (compressedSize < originalSize) {
+    var pct = Math.round((1 - compressedSize / originalSize) * 100);
+    ratioEl.textContent = pct + "%削減";
+    wrap.className = "size-item size-ratio";
+  } else {
+    ratioEl.textContent = "変化なし";
+    wrap.className = "size-item size-increased";
+  }
+  el.style.display = "";
+}
+
 function resetUI() {
   updateProgress(0);
   hideEl("processingSection");
   hideEl("resultSection");
   hideEl("cancelMsg");
   document.getElementById("download").style.display = "none";
+  document.getElementById("sizeSummary").style.display = "none";
   document.getElementById("completeList").innerHTML = "";
   document.getElementById("downloadNote").style.display = "none";
   isCanceled = false;
@@ -779,6 +845,7 @@ async function handleSingle(file) {
   downloadLink.download = file.name.replace(/\.pdf$/i, "_compressed.pdf");
   downloadLink.style.display = "flex";
 
+  showSizeSummary(file.size, result.size);
   document.getElementById("completeMsgText").textContent = "圧縮が完了しました！";
   document.getElementById("downloadNote").style.display = "block";
 
@@ -792,6 +859,8 @@ async function handleMultiple(files) {
 
   const list = document.getElementById("completeList");
 
+  var totalOriginal = 0, totalCompressed = 0;
+
   for (let idx = 0; idx < files.length; idx++) {
     if (isCanceled) break;
 
@@ -802,9 +871,13 @@ async function handleMultiple(files) {
     const result = await compressPDF(file);
     if (!result) continue;
 
+    totalOriginal += file.size;
+    totalCompressed += result.size;
+
     const url = URL.createObjectURL(result);
 
     const li = document.createElement("li");
+    li.style.flexWrap = "wrap";
 
     const nameSpan = document.createElement("span");
     nameSpan.className = "file-name";
@@ -822,13 +895,26 @@ async function handleMultiple(files) {
       a.remove();
     });
 
+    const sizeInfo = document.createElement("div");
+    sizeInfo.className = "file-size-info";
+    sizeInfo.style.width = "100%";
+    var sizeText = formatSize(file.size) + " → " + formatSize(result.size);
+    if (result.size < file.size) {
+      var pct = Math.round((1 - result.size / file.size) * 100);
+      sizeInfo.innerHTML = sizeText + ' <span class="ratio">' + pct + '%削減</span>';
+    } else {
+      sizeInfo.innerHTML = sizeText + ' <span class="ratio-increased">変化なし</span>';
+    }
+
     li.appendChild(nameSpan);
     li.appendChild(saveBtn);
+    li.appendChild(sizeInfo);
     list.appendChild(li);
 
     await new Promise(function(r) { setTimeout(r, 100); });
   }
 
+  if (totalOriginal > 0) showSizeSummary(totalOriginal, totalCompressed);
   document.getElementById("completeMsgText").textContent = "すべての処理が完了しました";
   document.getElementById("downloadNote").style.display = "block";
 
