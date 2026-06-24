@@ -37,6 +37,30 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://fudosan-tools.com/tools/pdf-compress/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fudosan-tools.com/tools/pdf-merge/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fudosan-tools.com/tools/pdf-rotate/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://fudosan-tools.com/tools/pdf-to-jpeg/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://fudosan-tools.com/blog/</loc>
     <lastmod>2026-06-23</lastmod>
     <changefreq>weekly</changefreq>

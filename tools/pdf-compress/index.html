@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6769343629657319"
+     crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0CHLS97WV4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0CHLS97WV4');
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B5490">
+<title>PDF圧縮｜ソフト不要・無料でブラウザ完結 - 不動産ツール</title>
+<link rel="canonical" href="https://fudosan-tools.com/tools/pdf-compress/">
+<meta name="description" content="PDFをソフト不要・無料で圧縮できるオンラインツール。ブラウザ内で完結しサーバーに送信されません。画質5段階から選べ、複数ファイルの一括圧縮にも対応。スマホ・PC対応。">
+<meta property="og:title" content="PDF圧縮｜ソフト不要・無料でブラウザ完結 - 不動産ツール">
+<meta property="og:description" content="PDFをソフト不要・無料で圧縮できるオンラインツール。ブラウザ内で完結しサーバーに送信されません。画質5段階から選べ、複数ファイルの一括圧縮にも対応。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fudosan-tools.com/tools/pdf-compress/">
+<meta property="og:image" content="https://fudosan-tools.com/shared/og-default.png">
+<meta property="og:site_name" content="不動産ツール">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PDF圧縮｜ソフト不要・無料でブラウザ完結 - 不動産ツール">
+<meta name="twitter:description" content="PDFをソフト不要・無料で圧縮。ブラウザ内で完結しサーバーに送信されません。画質5段階・複数ファイル一括対応。">
+<meta name="twitter:image" content="https://fudosan-tools.com/shared/og-default.png">
+<meta name="google-adsense-account" content="ca-pub-6769343629657319">
+<meta name="google-site-verification" content="87ep5P7jLXIExe7ZIfIJcP9933MuxqDTm5HXaaX4-9E">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preconnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preload" href="/shared/common.css" as="style">
+<link rel="stylesheet" href="/shared/common.css">
+<link rel="stylesheet" href="/shared/tool.css">
+<style>
+  /* ツールメイン幅オーバーライド */
+  .tool-main { max-width: 680px; }
+
+  /* 2カラムレイアウト */
+  .two-col { display: flex; flex-direction: column; gap: 0; }
+
+  @media (min-width: 768px) {
+    .tool-main { max-width: 860px; }
+  }
+  @media (min-width: 1024px) {
+    .tool-main { max-width: 960px; }
+    .two-col { flex-direction: row; gap: 24px; align-items: flex-start; }
+    .col-main { flex: 3; min-width: 0; }
+    .col-side { flex: 2; min-width: 0; position: sticky; top: 24px; }
+    .upload-zone { padding: 48px 32px; }
+  }
+
+  /* カード */
+  .card {
+    background: var(--clr-surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--clr-border);
+    padding: 20px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 10px var(--clr-shadow);
+  }
+
+  .section-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--clr-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 12px;
+  }
+
+  /* 品質ピル */
+  .quality-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+  .quality-pill input { display: none; }
+  .pill-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 2px solid var(--clr-border);
+    background: var(--clr-bg);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, transform 0.1s;
+    min-width: 60px;
+    text-align: center;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  .pill-name { font-size: 14px; font-weight: 600; color: var(--clr-text); white-space: nowrap; }
+  .pill-desc { font-size: 11px; color: var(--clr-text-muted); }
+  .quality-pill input:checked + .pill-inner {
+    background: rgba(27, 84, 144, 0.08);
+    border-color: var(--clr-primary);
+  }
+  .quality-pill input:checked + .pill-inner .pill-name { color: var(--clr-primary); }
+  .quality-pill:active .pill-inner { transform: scale(0.96); }
+
+  /* アップロードゾーン */
+  .upload-zone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 36px 20px;
+    border: 2px dashed var(--clr-border);
+    border-radius: var(--radius);
+    background: var(--clr-bg);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    text-align: center;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .upload-zone.dragover {
+    border-color: var(--clr-primary);
+    background: rgba(27, 84, 144, 0.05);
+  }
+  .upload-icon-wrap {
+    color: var(--clr-text-muted);
+    transition: transform 0.2s, color 0.2s;
+  }
+  .upload-zone.dragover .upload-icon-wrap {
+    color: var(--clr-primary);
+    transform: scale(1.1) translateY(-4px);
+  }
+  .upload-title { font-size: 16px; font-weight: 700; color: var(--clr-text); margin: 0; }
+  .upload-hint { font-size: 13px; color: var(--clr-text-muted); margin: 0; }
+
+  /* ボタン（tool.css .btn-primary をオーバーライド） */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s, opacity 0.15s;
+    text-decoration: none;
+    white-space: nowrap;
+    min-height: 48px;
+    font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    width: auto;
+    margin-top: 0;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+  .btn.btn-primary { background: var(--clr-primary); color: #fff; }
+  .btn.btn-primary:hover { background: #154078; }
+  .btn.btn-success { background: var(--clr-success); color: #fff; }
+  .btn.btn-success:hover { background: #218838; }
+  .btn.btn-danger { background: var(--clr-error); color: #fff; width: 100%; }
+  .btn.btn-danger:hover { background: #c9302c; }
+  .btn.btn-ghost { background: var(--clr-bg); color: var(--clr-text-muted); border: 1px solid var(--clr-border); width: 100%; }
+  .btn.btn-ghost:hover { background: var(--clr-border); }
+  .btn-block { width: 100%; }
+
+  /* プログレスバー */
+  .progress-wrap { margin-bottom: 16px; }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: var(--clr-text-muted);
+    gap: 8px;
+  }
+  #progressText { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #progressPct { flex-shrink: 0; font-weight: 700; color: var(--clr-primary); }
+  #progressContainer {
+    height: 8px;
+    border-radius: 9999px;
+    background: var(--clr-border);
+    overflow: hidden;
+  }
+  #progressBar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--clr-primary), #154078);
+    border-radius: 9999px;
+    transition: width 0.3s ease;
+  }
+
+  /* 完了バナー */
+  .complete-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 16px;
+    background: #f0fdf4;
+    border-radius: 8px;
+    border: 1px solid #bbf7d0;
+    color: var(--clr-success);
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 16px;
+  }
+  .complete-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background: var(--clr-success);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  /* 結果リスト */
+  .result-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0 0 14px;
+    padding: 0;
+  }
+  .result-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    background: var(--clr-bg);
+    border-radius: 8px;
+    border: 1px solid var(--clr-border);
+    gap: 12px;
+  }
+  .file-name {
+    font-size: 14px;
+    color: var(--clr-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+  }
+  .save-btn {
+    flex-shrink: 0;
+    padding: 9px 18px !important;
+    font-size: 14px !important;
+    min-height: 40px !important;
+    width: auto !important;
+  }
+  .result-actions { margin-top: 10px; }
+  .note-small {
+    font-size: 12px;
+    color: var(--clr-text-muted);
+    text-align: center;
+    padding: 8px 0;
+    line-height: 1.6;
+  }
+
+  /* キャンセルメッセージ */
+  .cancel-msg {
+    text-align: center;
+    color: var(--clr-error);
+    font-weight: 600;
+    font-size: 15px;
+    padding: 13px;
+    background: rgba(217, 83, 79, 0.1);
+    border-radius: 8px;
+    border: 1px solid var(--clr-error);
+    margin-bottom: 14px;
+  }
+
+  /* col-side 情報セクション */
+  .info-section {
+    background: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px var(--clr-shadow);
+  }
+  .info-toggle {
+    padding: 16px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--clr-text-muted);
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    display: block;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  .info-toggle::marker,
+  .info-toggle::-webkit-details-marker { display: none; }
+  .info-body {
+    padding: 4px 20px 20px;
+    border-top: 1px solid var(--clr-border);
+  }
+  .info-body h3 { font-size: 14px; font-weight: 700; color: var(--clr-text); margin: 16px 0 6px; }
+  .info-body p { font-size: 14px; color: var(--clr-text-muted); line-height: 1.7; margin: 0; }
+
+  /* col-side FAQ */
+  .col-side .faq {
+    margin-top: 0;
+    background: var(--clr-surface);
+    border-radius: var(--radius);
+    box-shadow: 0 2px 10px var(--clr-shadow);
+    overflow: hidden;
+  }
+  .col-side .faq h2 {
+    border-left: none;
+    padding: 16px 20px 0;
+    font-size: 14px;
+    margin: 0;
+  }
+  .col-side .faq-item { border-bottom: none; border-top: 1px solid var(--clr-border); }
+  .col-side .faq-q { padding: 14px 20px; }
+  .col-side .faq-a { padding: 0 20px 14px; }
+
+  /* プライバシーバッジ */
+  .privacy-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--clr-text-muted);
+    margin-bottom: 16px;
+  }
+  .privacy-badge svg { flex-shrink: 0; }
+
+  /* about セクション */
+  .about-section {
+    background: var(--clr-surface);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-top: 24px;
+    box-shadow: 0 2px 10px var(--clr-shadow);
+  }
+  .about-section h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--clr-text);
+    margin: 0 0 12px;
+  }
+  .about-section p {
+    font-size: 14px;
+    color: var(--clr-text-muted);
+    line-height: 1.8;
+    margin: 0 0 10px;
+  }
+  .about-section p:last-child { margin-bottom: 0; }
+
+  /* 注意書き */
+  .caution {
+    font-size: 12px;
+    color: var(--clr-text-muted);
+    text-align: center;
+    line-height: 1.9;
+    padding: 0 8px;
+    margin: 16px 0 0;
+  }
+
+  /* このツールについて（折りたたみ） */
+  .about-details {
+    background: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    margin-top: 16px;
+  }
+  .about-details summary {
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    color: var(--clr-primary);
+    touch-action: manipulation;
+  }
+  .about-details p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--clr-text-muted);
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+  @media (prefers-color-scheme: dark) {
+    .about-details summary { color: var(--clr-primary-dark); }
+  }
+  [data-theme="dark"] .about-details summary { color: var(--clr-primary-dark); }
+
+  /* ユーティリティ */
+  .hidden { display: none !important; }
+
+  /* ダークモード補正 */
+  @media (prefers-color-scheme: dark) {
+    .quality-pill input:checked + .pill-inner {
+      background: rgba(107, 168, 224, 0.12);
+      border-color: var(--clr-primary-dark);
+    }
+    .quality-pill input:checked + .pill-inner .pill-name { color: var(--clr-primary-dark); }
+    #progressPct { color: var(--clr-primary-dark); }
+    #progressBar { background: linear-gradient(90deg, var(--clr-primary-dark), #4a90d9); }
+    .complete-banner { background: #0d2520; border-color: #065f46; }
+    .cancel-msg { background: rgba(248, 113, 113, 0.12); }
+  }
+  [data-theme="dark"] .quality-pill input:checked + .pill-inner {
+    background: rgba(107, 168, 224, 0.12);
+    border-color: var(--clr-primary-dark);
+  }
+  [data-theme="dark"] .quality-pill input:checked + .pill-inner .pill-name { color: var(--clr-primary-dark); }
+  [data-theme="dark"] #progressPct { color: var(--clr-primary-dark); }
+  [data-theme="dark"] #progressBar { background: linear-gradient(90deg, var(--clr-primary-dark), #4a90d9); }
+  [data-theme="dark"] .complete-banner { background: #0d2520; border-color: #065f46; }
+  [data-theme="dark"] .cancel-msg { background: rgba(248, 113, 113, 0.12); }
+</style>
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+  {"@type":"WebApplication","name":"PDF圧縮ツール","url":"https://fudosan-tools.com/tools/pdf-compress/","description":"PDFファイルを無料で圧縮できるオンラインツール","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"inLanguage":"ja"},
+  {"@type":"BreadcrumbList","itemListElement":[
+    {"@type":"ListItem","position":1,"name":"ホーム","item":"https://fudosan-tools.com/"},
+    {"@type":"ListItem","position":2,"name":"PDFツール","item":"https://fudosan-tools.com/tools/pdf-compress/"},
+    {"@type":"ListItem","position":3,"name":"PDF圧縮","item":"https://fudosan-tools.com/tools/pdf-compress/"}
+  ]},
+  {"@type":"FAQPage","mainEntity":[
+    {"@type":"Question","name":"PDF圧縮は完全無料で使えますか？","acceptedAnswer":{"@type":"Answer","text":"はい、完全無料です。ファイル数・回数の制限はなく、アカウント登録も不要です。"}},
+    {"@type":"Question","name":"ソフトをインストールしなくてもPDFを圧縮できますか？","acceptedAnswer":{"@type":"Answer","text":"はい、ソフト不要でブラウザだけで圧縮できます。ChromeやSafariからアクセスするだけで利用できます。"}},
+    {"@type":"Question","name":"ファイルはサーバーに送られますか？","acceptedAnswer":{"@type":"Answer","text":"送られません。すべての処理はブラウザ内で完結します。PDFファイルが外部サーバーに送信されることはありません。"}},
+    {"@type":"Question","name":"圧縮してもファイルサイズが変わりません","acceptedAnswer":{"@type":"Answer","text":"すでに圧縮済みのPDFや文字のみのPDFはサイズが変わらない場合があります。品質設定を「最小（72dpi）」に下げることで改善される場合があります。"}},
+    {"@type":"Question","name":"PDF圧縮の方法を教えてください","acceptedAnswer":{"@type":"Answer","text":"①画質プリセットを選ぶ（最小〜高画質）②PDFファイルを選択またはドロップ③圧縮完了後にダウンロード、の3ステップで完了します。"}},
+    {"@type":"Question","name":"複数のPDFをまとめて圧縮できますか？","acceptedAnswer":{"@type":"Answer","text":"はい、複数ファイルを一度に選択できます。ファイルごとに圧縮処理が行われ、それぞれ個別にダウンロードできます。"}},
+    {"@type":"Question","name":"スマホ（iPhone・Android）でPDFを圧縮できますか？","acceptedAnswer":{"@type":"Answer","text":"はい、iPhone・AndroidのブラウザからPDF圧縮ツールを利用できます。アプリのインストールは不要です。"}}
+  ]}
+]}
+</script>
+
+<!-- HowTo -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"PDFを無料で圧縮する方法","description":"ブラウザだけでPDFファイルサイズを削減する手順","totalTime":"PT1M","tool":{"@type":"HowToTool","name":"不動産ツール PDF圧縮ツール"},"step":[
+  {"@type":"HowToStep","position":1,"name":"PDFを選択","text":"「ファイルを選択」ボタンをタップするか、PDFファイルをドラッグ＆ドロップします。"},
+  {"@type":"HowToStep","position":2,"name":"画質プリセットを選択","text":"「スマホ」「標準」「印刷」「最小」から用途に合わせた画質を選びます。"},
+  {"@type":"HowToStep","position":3,"name":"圧縮してダウンロード","text":"自動的にブラウザ内で圧縮処理が行われ、完了後にダウンロードできます。"}
+]}
+</script>
+
+<!-- CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+</head>
+<body>
+<header id="site-header" class="site-header"></header>
+
+<nav class="breadcrumb" aria-label="パンくずリスト">
+  <ol><li><a href="/">ホーム</a></li><li>PDFツール</li><li>PDF圧縮</li></ol>
+</nav>
+
+<div class="ad-slot ad-top" aria-hidden="true"></div>
+
+<main class="tool-main">
+  <h1>PDF圧縮</h1>
+  <p class="tool-desc">PDFファイルを無料で圧縮できるオンラインツール。すべての処理がブラウザ内で完結し、ファイルはサーバーに送信されません。複数ファイルの一括圧縮にも対応。</p>
+
+  <div class="privacy-badge">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    ファイルは端末外に送信されません
+  </div>
+
+  <div class="two-col">
+    <div class="col-main">
+
+      <!-- 品質選択 -->
+      <div class="card">
+        <p class="section-label">圧縮品質</p>
+        <div class="quality-grid">
+          <label class="quality-pill">
+            <input type="radio" name="qualityPreset" value="min">
+            <span class="pill-inner"><span class="pill-name">最小</span><span class="pill-desc">72dpi</span></span>
+          </label>
+          <label class="quality-pill">
+            <input type="radio" name="qualityPreset" value="mobile">
+            <span class="pill-inner"><span class="pill-name">スマホ</span><span class="pill-desc">110dpi</span></span>
+          </label>
+          <label class="quality-pill">
+            <input type="radio" name="qualityPreset" value="pc" checked>
+            <span class="pill-inner"><span class="pill-name">標準</span><span class="pill-desc">150dpi</span></span>
+          </label>
+          <label class="quality-pill">
+            <input type="radio" name="qualityPreset" value="print">
+            <span class="pill-inner"><span class="pill-name">印刷</span><span class="pill-desc">220dpi</span></span>
+          </label>
+          <label class="quality-pill">
+            <input type="radio" name="qualityPreset" value="pc-hi">
+            <span class="pill-inner"><span class="pill-name">高画質</span><span class="pill-desc">300dpi</span></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- アップロードエリア -->
+      <div class="card" style="padding:0;">
+        <div id="dropArea" class="upload-zone">
+          <div class="upload-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="12" y1="17" x2="12" y2="11"/>
+              <polyline points="9 14 12 11 15 14"/>
+            </svg>
+          </div>
+          <p class="upload-title">PDFをタップして選択</p>
+          <p class="upload-hint">または ここにドロップ（複数可）</p>
+          <button id="fileButton" type="button" class="btn btn-primary">ファイルを選択</button>
+        </div>
+        <input type="file" id="fileInput" accept="application/pdf,.pdf" multiple style="display:none">
+      </div>
+
+      <!-- 処理中セクション -->
+      <div id="processingSection" class="card hidden">
+        <div class="progress-wrap">
+          <div class="progress-label">
+            <span id="progressText">処理中...</span>
+            <span id="progressPct">0%</span>
+          </div>
+          <div id="progressContainer">
+            <div id="progressBar"></div>
+          </div>
+        </div>
+        <button id="cancelBtn" type="button" class="btn btn-danger">キャンセル</button>
+      </div>
+
+      <!-- キャンセルメッセージ -->
+      <div id="cancelMsg" class="cancel-msg hidden">キャンセルされました</div>
+
+      <!-- 完了セクション -->
+      <div id="resultSection" class="card hidden">
+        <div class="complete-banner">
+          <span class="complete-icon">&#10003;</span>
+          <span id="completeMsgText">圧縮が完了しました！</span>
+        </div>
+        <a id="download" class="btn btn-success btn-block" style="display:none; margin-bottom:14px;">
+          圧縮後のPDFをダウンロード
+        </a>
+        <ul id="completeList" class="result-list"></ul>
+        <p id="downloadNote" class="note-small" style="display:none;">
+          ※ページを閉じると変換データは自動的に消去されます
+        </p>
+        <div class="result-actions">
+          <button id="resetBtn" type="button" class="btn btn-ghost">別のPDFを圧縮する</button>
+        </div>
+      </div>
+
+    </div><!-- /.col-main -->
+
+    <div class="col-side">
+
+      <!-- このツールについて -->
+      <details class="info-section">
+        <summary class="info-toggle">このツールについて ▾</summary>
+        <div class="info-body">
+          <h3>仕組み</h3>
+          <p>PDFの各ページを画像化し、JPEGとして再圧縮することでファイルサイズを削減します。文字データは画像化されます。</p>
+          <h3>なぜ無料？</h3>
+          <p>すべての処理が端末内で完結するため、サーバー費用が発生しません。</p>
+          <h3>処理の仕組み</h3>
+          <p>すべての処理はブラウザ内で行われます。PDFファイルがサーバーへ送信されることはありません。</p>
+        </div>
+      </details>
+
+      <!-- FAQ -->
+      <section class="faq" aria-labelledby="faq-title">
+        <h2 id="faq-title">よくある質問</h2>
+        <div class="faq-item">
+          <button class="faq-q">PDF圧縮は完全無料で使えますか？</button>
+          <div class="faq-a">はい、完全無料です。ファイル数・回数の制限はなく、アカウント登録も不要です。</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">ソフトをインストールしなくてもPDFを圧縮できますか？</button>
+          <div class="faq-a">はい、ソフト不要でブラウザだけで圧縮できます。ChromeやSafariからアクセスするだけで利用できます。</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">PDFはサーバーに送られますか？</button>
+          <div class="faq-a">送られません。すべての処理はブラウザ内で完結します。PDFファイルが外部サーバーに送信されることはありません。</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">圧縮してもファイルサイズが変わりません</button>
+          <div class="faq-a">すでに圧縮済みのPDFや文字のみのPDFはサイズが変わらない場合があります。品質設定を「最小（72dpi）」に下げることで改善される場合があります。</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">PDF圧縮の方法を教えてください</button>
+          <div class="faq-a">①画質プリセットを選ぶ（最小〜高画質）②PDFファイルを選択またはドロップ③圧縮完了後にダウンロード、の3ステップで完了します。</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">複数のPDFをまとめて圧縮できますか？</button>
+          <div class="faq-a">はい、複数ファイルを一度に選択できます。ファイルごとに圧縮処理が行われ、それぞれ個別にダウンロードできます。</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">スマホ（iPhone・Android）でPDFを圧縮できますか？</button>
+          <div class="faq-a">はい、iPhone・AndroidのブラウザからPDF圧縮ツールを利用できます。アプリのインストールは不要です。</div>
+        </div>
+      </section>
+
+    </div><!-- /.col-side -->
+  </div><!-- /.two-col -->
+
+  <div class="ad-slot ad-middle" aria-hidden="true"></div>
+
+  <section class="about-section">
+    <h2>PDF圧縮とは</h2>
+    <p>PDF圧縮とは、PDFファイルのデータ量を削減してファイルサイズを小さくする操作のことです。メール添付のサイズ制限を超えるPDFを送る際や、ストレージを節約したいときに使われます。</p>
+    <p>このツールはPDFの各ページを画像として再描画し、JPEG形式で再圧縮することでファイルサイズを削減します。すべての処理はブラウザ内で行われ、PDFファイルはサーバーに送信されません。文字のみで構成されたPDFは画像を含まないため、圧縮効果が小さい場合があります。</p>
+  </section>
+
+  <p class="caution">
+    ※ページ数や画像が多いPDFは圧縮に時間がかかる場合があります<br>
+    ※メモリ不足により処理が途中で止まることがあります
+  </p>
+
+  <details class="about-details">
+    <summary>このツールについて</summary>
+    <p><strong>仕組み：</strong>PDFの各ページを指定DPIの画像に変換し、JPEG形式で再圧縮してPDFに再構成することでファイルサイズを削減します。</p>
+    <p><strong>なぜ無料か：</strong>Google AdSenseによる広告収入で運営しています。登録・インストールは一切不要です。</p>
+    <p><strong>処理の仕組み：</strong>すべての処理はブラウザ内で行われます。PDFファイルがサーバーへ送信されることはありません。</p>
+  </details>
+
+  <section class="related-tools" aria-labelledby="related-title">
+    <h2 id="related-title">関連ツール</h2>
+    <div class="related-grid">
+      <a class="related-card" href="/tools/pdf-merge/">PDF<br>結合</a>
+      <a class="related-card" href="/tools/pdf-rotate/">PDF<br>回転</a>
+      <a class="related-card" href="/tools/pdf-to-jpeg/">PDF→<br>画像変換</a>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer" class="site-footer"></footer>
+<script src="/shared/common.js" defer></script>
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+const { PDFDocument } = PDFLib;
+let isCanceled = false;
+const isMobile = window.innerWidth < 768;
+
+function dataURLToUint8Array(dataURL) {
+  const base64 = dataURL.split(',')[1];
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+  return bytes;
+}
+
+function getPresetSettings() {
+  const preset = document.querySelector("input[name='qualityPreset']:checked").value;
+  let setting = {};
+  switch (preset) {
+    case "mobile": setting = { dpi: 110, quality: 0.5 }; break;
+    case "pc":     setting = { dpi: 150, quality: 0.6 }; break;
+    case "pc-hi":  setting = { dpi: 300, quality: 0.8 }; break;
+    case "print":  setting = { dpi: 220, quality: 0.8 }; break;
+    case "min":    setting = { dpi: 72,  quality: 0.3 }; break;
+    default:       setting = { dpi: 150, quality: 0.6 };
+  }
+  if (isMobile && setting.dpi > 160) {
+    setting.dpi = 160;
+    setting.quality = 0.6;
+  }
+  return setting;
+}
+
+function updateProgress(percent) {
+  const pct = Math.round(percent);
+  const bar = document.getElementById("progressBar");
+  const pctText = document.getElementById("progressPct");
+  if (bar) bar.style.width = pct + "%";
+  if (pctText) pctText.textContent = pct + "%";
+}
+
+function showEl(id) { document.getElementById(id).classList.remove("hidden"); }
+function hideEl(id) { document.getElementById(id).classList.add("hidden"); }
+
+function resetUI() {
+  updateProgress(0);
+  hideEl("processingSection");
+  hideEl("resultSection");
+  hideEl("cancelMsg");
+  document.getElementById("download").style.display = "none";
+  document.getElementById("completeList").innerHTML = "";
+  document.getElementById("downloadNote").style.display = "none";
+  isCanceled = false;
+}
+
+async function compressPDF(file) {
+  const { dpi, quality } = getPresetSettings();
+  const scale = dpi / 72;
+
+  let pdf, loadingTask;
+  try {
+    const arrayBuffer = await file.arrayBuffer();
+    loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
+    pdf = await loadingTask.promise;
+  } catch (e) {
+    alert("PDFの読み込みに失敗しました。ファイルが壊れているか、パスワードがかかっている可能性があります。");
+    return null;
+  }
+
+  const newPdf = await PDFDocument.create();
+  const totalPages = pdf.numPages;
+
+  for (let i = 1; i <= totalPages; i++) {
+    if (isCanceled) {
+      loadingTask.destroy();
+      return null;
+    }
+    try {
+      const page = await pdf.getPage(i);
+      const viewport = page.getViewport({ scale: 1 });
+      const renderViewport = page.getViewport({ scale });
+
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = renderViewport.width;
+      canvas.height = renderViewport.height;
+
+      await page.render({ canvasContext: ctx, viewport: renderViewport }).promise;
+
+      const jpegDataUrl = canvas.toDataURL("image/jpeg", quality);
+      const jpegBytes = dataURLToUint8Array(jpegDataUrl);
+      const embeddedJpeg = await newPdf.embedJpg(jpegBytes);
+
+      const newPage = newPdf.addPage([viewport.width, viewport.height]);
+      newPage.drawImage(embeddedJpeg, { x: 0, y: 0, width: viewport.width, height: viewport.height });
+
+      canvas.width = 0;
+      canvas.height = 0;
+
+      updateProgress((i / totalPages) * 100);
+
+      await new Promise(r => setTimeout(r, isMobile ? 400 : 100));
+    } catch (err) {
+      console.error("Page " + i + " error:", err);
+    }
+  }
+
+  loadingTask.destroy();
+  const pdfBytes = await newPdf.save();
+  return new Blob([pdfBytes], { type: "application/pdf" });
+}
+
+async function handleSingle(file) {
+  resetUI();
+  document.getElementById("progressText").textContent = file.name;
+  showEl("processingSection");
+
+  const result = await compressPDF(file);
+  if (isCanceled || !result) return;
+
+  const url = URL.createObjectURL(result);
+  const downloadLink = document.getElementById("download");
+  downloadLink.href = url;
+  downloadLink.download = file.name.replace(/\.pdf$/i, "_compressed.pdf");
+  downloadLink.style.display = "flex";
+
+  document.getElementById("completeMsgText").textContent = "圧縮が完了しました！";
+  document.getElementById("downloadNote").style.display = "block";
+
+  hideEl("processingSection");
+  showEl("resultSection");
+}
+
+async function handleMultiple(files) {
+  resetUI();
+  showEl("processingSection");
+
+  const list = document.getElementById("completeList");
+
+  for (let idx = 0; idx < files.length; idx++) {
+    if (isCanceled) break;
+
+    const file = files[idx];
+    updateProgress(0);
+    document.getElementById("progressText").textContent = file.name + "（" + (idx + 1) + "/" + files.length + "）";
+
+    const result = await compressPDF(file);
+    if (!result) continue;
+
+    const url = URL.createObjectURL(result);
+
+    const li = document.createElement("li");
+
+    const nameSpan = document.createElement("span");
+    nameSpan.className = "file-name";
+    nameSpan.textContent = file.name;
+
+    const saveBtn = document.createElement("button");
+    saveBtn.textContent = "保存";
+    saveBtn.className = "btn btn-success save-btn";
+    saveBtn.addEventListener("click", function() {
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = file.name.replace(/\.pdf$/i, "_compressed.pdf");
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+
+    li.appendChild(nameSpan);
+    li.appendChild(saveBtn);
+    list.appendChild(li);
+
+    await new Promise(function(r) { setTimeout(r, 100); });
+  }
+
+  document.getElementById("completeMsgText").textContent = "すべての処理が完了しました";
+  document.getElementById("downloadNote").style.display = "block";
+
+  hideEl("processingSection");
+  showEl("resultSection");
+}
+
+document.getElementById("fileButton").addEventListener("click", function(e) {
+  e.stopPropagation();
+  document.getElementById("fileInput").click();
+});
+
+var dropArea = document.getElementById("dropArea");
+dropArea.addEventListener("click", function() {
+  document.getElementById("fileInput").click();
+});
+
+document.getElementById("fileInput").addEventListener("change", function(e) {
+  var files = Array.from(e.target.files);
+  if (files.length === 0) return;
+  e.target.value = "";
+  if (files.length === 1) handleSingle(files[0]);
+  else handleMultiple(files);
+});
+
+dropArea.addEventListener("dragover", function(e) {
+  e.preventDefault();
+  dropArea.classList.add("dragover");
+});
+dropArea.addEventListener("dragleave", function() { dropArea.classList.remove("dragover"); });
+dropArea.addEventListener("drop", function(e) {
+  e.preventDefault();
+  dropArea.classList.remove("dragover");
+  var files = Array.from(e.dataTransfer.files).filter(function(f) { return f.type === "application/pdf"; });
+  if (files.length === 0) return;
+  if (files.length === 1) handleSingle(files[0]);
+  else handleMultiple(files);
+});
+
+document.getElementById("cancelBtn").addEventListener("click", function() {
+  isCanceled = true;
+  hideEl("processingSection");
+  showEl("cancelMsg");
+  setTimeout(function() { hideEl("cancelMsg"); }, 2500);
+});
+
+document.getElementById("resetBtn").addEventListener("click", resetUI);
+</script>
+</body>
+</html>

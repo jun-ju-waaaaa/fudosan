@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6769343629657319"
+     crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0CHLS97WV4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0CHLS97WV4');
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B5490">
+<title>PDF回転｜向きを変えて保存できる無料ツール - 不動産ツール</title>
+<link rel="canonical" href="https://fudosan-tools.com/tools/pdf-rotate/">
+<meta name="description" content="PDFのページを回転して保存できる無料ツール。ソフト不要・ブラウザ完結・サーバー送信なし。1ページだけ回転・向き変更・90°〜360°対応。スマホ・PC対応。">
+<meta property="og:title" content="PDF回転｜向きを変えて保存できる無料ツール - 不動産ツール">
+<meta property="og:description" content="PDFのページを回転して保存できる無料ツール。ソフト不要・ブラウザ完結・サーバー送信なし。1ページだけ回転・向き変更にも対応。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fudosan-tools.com/tools/pdf-rotate/">
+<meta property="og:image" content="https://fudosan-tools.com/shared/og-default.png">
+<meta property="og:site_name" content="不動産ツール">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PDF回転｜向きを変えて保存できる無料ツール - 不動産ツール">
+<meta name="twitter:description" content="PDFの向きを変えて保存。ソフト不要・ブラウザ完結・サーバー送信なし。1ページだけ回転にも対応。">
+<meta name="twitter:image" content="https://fudosan-tools.com/shared/og-default.png">
+<meta name="google-adsense-account" content="ca-pub-6769343629657319">
+<meta name="google-site-verification" content="87ep5P7jLXIExe7ZIfIJcP9933MuxqDTm5HXaaX4-9E">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preconnect" href="https://pagead2.googlesyndication.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preload" href="/shared/common.css" as="style">
+<link rel="stylesheet" href="/shared/common.css">
+<link rel="stylesheet" href="/shared/tool.css">
+<style>
+  .tool-main { max-width: 860px; }
+
+  /* カード */
+  .card {
+    background: var(--clr-surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--clr-border);
+    padding: 20px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 10px var(--clr-shadow);
+  }
+
+  /* アップロードゾーン */
+  .upload-zone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 36px 20px;
+    border: 2px dashed var(--clr-border);
+    border-radius: var(--radius);
+    background: var(--clr-bg);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    text-align: center;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .upload-zone.dragover {
+    border-color: var(--clr-primary);
+    background: rgba(27, 84, 144, 0.05);
+  }
+  .upload-icon-wrap {
+    color: var(--clr-text-muted);
+    transition: transform 0.2s, color 0.2s;
+  }
+  .upload-zone.dragover .upload-icon-wrap {
+    color: var(--clr-primary);
+    transform: scale(1.1) translateY(-4px);
+  }
+  .upload-title { font-size: 16px; font-weight: 700; color: var(--clr-text); margin: 0; }
+  .upload-hint { font-size: 13px; color: var(--clr-text-muted); margin: 0; }
+
+  /* ボタン */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s, opacity 0.15s;
+    text-decoration: none;
+    white-space: nowrap;
+    min-height: 48px;
+    font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    width: auto;
+    margin-top: 0;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+  .btn.btn-primary { background: var(--clr-primary); color: #fff; }
+  .btn.btn-primary:hover { background: #154078; }
+  .btn.btn-success { background: var(--clr-success); color: #fff; }
+  .btn.btn-success:hover { background: #218838; }
+  .btn.btn-ghost { background: var(--clr-bg); color: var(--clr-text-muted); border: 1px solid var(--clr-border); width: 100%; }
+  .btn.btn-ghost:hover { background: var(--clr-border); }
+  .btn-block { width: 100%; }
+
+  /* 操作パネル */
+  .pages-header { margin-bottom: 12px; }
+  .pages-file-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    color: var(--clr-text-muted);
+    min-width: 0;
+  }
+  .file-name-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--clr-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+  }
+  .page-count-label {
+    font-size: 12px;
+    color: var(--clr-text-muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .bulk-btns { display: flex; gap: 8px; }
+  .btn-bulk {
+    flex: 1;
+    padding: 11px 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--clr-primary);
+    background: rgba(27, 84, 144, 0.08);
+    border: 1px solid var(--clr-primary);
+    border-radius: 8px;
+    cursor: pointer;
+    min-height: 44px;
+    font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    transition: background 0.15s;
+    text-align: center;
+  }
+  .btn-bulk:hover { background: rgba(27, 84, 144, 0.15); }
+
+  /* サムネイルグリッド */
+  .page-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  @media (min-width: 768px) {
+    .page-grid { grid-template-columns: repeat(4, 1fr); }
+    .upload-zone { padding: 48px 32px; }
+  }
+
+  /* ページカード */
+  .page-card {
+    background: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px var(--clr-shadow);
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.15s;
+  }
+  .page-card.rotated { border-color: var(--clr-primary); }
+  @media (prefers-color-scheme: dark) { .page-card.rotated { border-color: var(--clr-primary-dark); } }
+  [data-theme="dark"] .page-card.rotated { border-color: var(--clr-primary-dark); }
+
+  /* サムネイル */
+  .thumb-box {
+    background: var(--clr-bg);
+    height: 140px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .canvas-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+  .page-canvas {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }
+  .thumb-spinner {
+    font-size: 11px;
+    color: var(--clr-text-muted);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* ページ情報 */
+  .page-info {
+    padding: 8px 6px 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+  .page-num { font-size: 11px; color: var(--clr-text-muted); text-align: center; }
+  .rot-indicator {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--clr-primary);
+    min-height: 16px;
+    text-align: center;
+  }
+  @media (prefers-color-scheme: dark) { .rot-indicator { color: var(--clr-primary-dark); } }
+  [data-theme="dark"] .rot-indicator { color: var(--clr-primary-dark); }
+
+  .page-btns { display: flex; gap: 4px; }
+  .page-btn {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--clr-border);
+    border-radius: 6px;
+    background: var(--clr-surface);
+    color: var(--clr-text-muted);
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    padding: 0;
+  }
+  .page-btn:hover {
+    background: rgba(27, 84, 144, 0.08);
+    color: var(--clr-primary);
+    border-color: var(--clr-primary);
+  }
+
+  /* 保存カード */
+  .save-card { padding: 16px; }
+
+  /* プログレスバー */
+  .progress-wrap { margin-bottom: 4px; }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: var(--clr-text-muted);
+    gap: 8px;
+  }
+  #progressText { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #progressPct { flex-shrink: 0; font-weight: 700; color: var(--clr-primary); }
+  #progressContainer {
+    height: 8px;
+    border-radius: 9999px;
+    background: var(--clr-border);
+    overflow: hidden;
+  }
+  #progressBar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--clr-primary), #154078);
+    border-radius: 9999px;
+    transition: width 0.3s ease;
+  }
+
+  /* 完了バナー */
+  .complete-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 16px;
+    background: #f0fdf4;
+    border-radius: 8px;
+    border: 1px solid #bbf7d0;
+    color: var(--clr-success);
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 16px;
+  }
+  .complete-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background: var(--clr-success);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .result-actions { margin-top: 12px; }
+  .note-small {
+    font-size: 12px;
+    color: var(--clr-text-muted);
+    text-align: center;
+    padding: 8px 0;
+    line-height: 1.6;
+  }
+
+  /* プライバシーバッジ */
+  .privacy-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--clr-text-muted);
+    margin-bottom: 16px;
+  }
+  .privacy-badge svg { flex-shrink: 0; }
+
+  /* about セクション */
+  .about-section {
+    background: var(--clr-surface);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-top: 24px;
+    box-shadow: 0 2px 10px var(--clr-shadow);
+  }
+  .about-section h2 { font-size: 16px; font-weight: 700; color: var(--clr-text); margin: 0 0 12px; }
+  .about-section p { font-size: 14px; color: var(--clr-text-muted); line-height: 1.8; margin: 0 0 10px; }
+  .about-section p:last-child { margin-bottom: 0; }
+
+  .caution {
+    font-size: 12px;
+    color: var(--clr-text-muted);
+    text-align: center;
+    line-height: 1.9;
+    padding: 0 8px;
+    margin: 16px 0 0;
+  }
+
+  .about-details {
+    background: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    margin-top: 16px;
+  }
+  .about-details summary {
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    color: var(--clr-primary);
+    touch-action: manipulation;
+  }
+  .about-details p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--clr-text-muted);
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+  @media (prefers-color-scheme: dark) { .about-details summary { color: var(--clr-primary-dark); } }
+  [data-theme="dark"] .about-details summary { color: var(--clr-primary-dark); }
+
+  .hidden { display: none !important; }
+
+  /* ダークモード補正 */
+  @media (prefers-color-scheme: dark) {
+    #progressPct { color: var(--clr-primary-dark); }
+    #progressBar { background: linear-gradient(90deg, var(--clr-primary-dark), #4a90d9); }
+    .complete-banner { background: #0d2520; border-color: #065f46; }
+    .btn-bulk {
+      color: var(--clr-primary-dark);
+      background: rgba(107, 168, 224, 0.12);
+      border-color: var(--clr-primary-dark);
+    }
+    .page-btn:hover {
+      background: rgba(107, 168, 224, 0.12);
+      color: var(--clr-primary-dark);
+      border-color: var(--clr-primary-dark);
+    }
+  }
+  [data-theme="dark"] #progressPct { color: var(--clr-primary-dark); }
+  [data-theme="dark"] #progressBar { background: linear-gradient(90deg, var(--clr-primary-dark), #4a90d9); }
+  [data-theme="dark"] .complete-banner { background: #0d2520; border-color: #065f46; }
+  [data-theme="dark"] .btn-bulk {
+    color: var(--clr-primary-dark);
+    background: rgba(107, 168, 224, 0.12);
+    border-color: var(--clr-primary-dark);
+  }
+  [data-theme="dark"] .page-btn:hover {
+    background: rgba(107, 168, 224, 0.12);
+    color: var(--clr-primary-dark);
+    border-color: var(--clr-primary-dark);
+  }
+</style>
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+  {"@type":"WebApplication","name":"PDF回転ツール","url":"https://fudosan-tools.com/tools/pdf-rotate/","description":"PDFのページを回転できる無料オンラインツール","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"inLanguage":"ja"},
+  {"@type":"BreadcrumbList","itemListElement":[
+    {"@type":"ListItem","position":1,"name":"ホーム","item":"https://fudosan-tools.com/"},
+    {"@type":"ListItem","position":2,"name":"PDFツール","item":"https://fudosan-tools.com/tools/pdf-rotate/"},
+    {"@type":"ListItem","position":3,"name":"PDF回転","item":"https://fudosan-tools.com/tools/pdf-rotate/"}
+  ]},
+  {"@type":"FAQPage","mainEntity":[
+    {"@type":"Question","name":"PDFを回転して保存できますか？","acceptedAnswer":{"@type":"Answer","text":"はい、回転後にそのまま保存できます。Adobe Acrobat Readerの無料版では回転を保存できませんが、このツールではブラウザ内で回転処理を行い、回転済みのPDFをダウンロードできます。"}},
+    {"@type":"Question","name":"PDF回転は無料で使えますか？","acceptedAnswer":{"@type":"Answer","text":"はい、完全無料です。ページ数・回数の制限はなく、アカウント登録も不要です。"}},
+    {"@type":"Question","name":"1ページだけ回転できますか？","acceptedAnswer":{"@type":"Answer","text":"はい、ページごとに個別に回転角度を設定できます。特定のページだけ向きを変えることが可能です。"}},
+    {"@type":"Question","name":"PDFの向きを変えて保存する方法は？","acceptedAnswer":{"@type":"Answer","text":"①PDFファイルを選択②サムネイル一覧で各ページの回転ボタンを押す③「回転して保存」ボタンをクリック、の3ステップで向きを変えて保存できます。"}},
+    {"@type":"Question","name":"180°・270°回転はできますか？","acceptedAnswer":{"@type":"Answer","text":"はい、90°単位で回転できます。左右どちらかのボタンを2回押すと180°、3回押すと270°回転できます。"}},
+    {"@type":"Question","name":"ファイルはサーバーに送られますか？","acceptedAnswer":{"@type":"Answer","text":"送られません。すべての処理はブラウザ内で完結します。PDFファイルが外部サーバーに送信されることはありません。"}}
+  ]}
+]}
+</script>
+
+<!-- HowTo -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HowTo","name":"PDFのページを回転して保存する方法","description":"ブラウザだけでPDFのページを回転する手順","totalTime":"PT1M","tool":{"@type":"HowToTool","name":"不動産ツール PDF回転ツール"},"step":[
+  {"@type":"HowToStep","position":1,"name":"PDFを選択","text":"「ファイルを選択」ボタンをタップするか、PDFファイルをドラッグ＆ドロップします。"},
+  {"@type":"HowToStep","position":2,"name":"ページを回転","text":"各ページの↺↻ボタンで個別に回転、または「すべて右回転」「すべて左回転」ボタンで一括回転します。"},
+  {"@type":"HowToStep","position":3,"name":"回転して保存","text":"「回転して保存」ボタンをタップすると、ブラウザ内で処理が行われ、完了後にダウンロードできます。"}
+]}
+</script>
+
+<!-- CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+</head>
+<body>
+<header id="site-header" class="site-header"></header>
+
+<nav class="breadcrumb" aria-label="パンくずリスト">
+  <ol><li><a href="/">ホーム</a></li><li>PDFツール</li><li>PDF回転</li></ol>
+</nav>
+
+<div class="ad-slot ad-top" aria-hidden="true"></div>
+
+<main class="tool-main">
+  <h1>PDF回転</h1>
+  <p class="tool-desc">PDFのページを90°単位で回転できる無料ツール。ページごとの個別回転と全ページ一括回転に対応。すべての処理がブラウザ内で完結し、ファイルはサーバーに送信されません。</p>
+
+  <div class="privacy-badge">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    ファイルは端末外に送信されません
+  </div>
+
+  <!-- アップロードエリア -->
+  <div id="uploadCard" class="card" style="padding:0;">
+    <div id="dropArea" class="upload-zone">
+      <div class="upload-icon-wrap">
+        <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="9" y1="12" x2="15" y2="12"/>
+          <line x1="9" y1="16" x2="13" y2="16"/>
+        </svg>
+      </div>
+      <p class="upload-title">PDFをタップして選択</p>
+      <p class="upload-hint">または ここにドロップ</p>
+      <button id="fileButton" type="button" class="btn btn-primary">ファイルを選択</button>
+    </div>
+    <input type="file" id="fileInput" accept="application/pdf,.pdf" style="display:none">
+  </div>
+
+  <!-- 読み込み中 -->
+  <div id="loadingCard" class="card hidden">
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span id="loadingText">サムネイルを生成中...</span>
+        <span id="loadingPct">0%</span>
+      </div>
+      <div id="loadingContainer" style="height:8px;border-radius:9999px;background:var(--clr-border);overflow:hidden;">
+        <div id="loadingBar" style="height:100%;width:0%;background:linear-gradient(90deg,var(--clr-primary),#154078);border-radius:9999px;transition:width 0.3s ease;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ページ一覧 -->
+  <div id="pagesCard" class="hidden">
+    <div class="pages-header card">
+      <div class="pages-file-row">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+        </svg>
+        <span id="fileNameLabel" class="file-name-label">&mdash;</span>
+        <span id="pageCountLabel" class="page-count-label"></span>
+      </div>
+      <div class="bulk-btns">
+        <button id="rotateAllLeft" type="button" class="btn-bulk">&circlearrowleft; すべて左回転</button>
+        <button id="rotateAllRight" type="button" class="btn-bulk">すべて右回転 &circlearrowright;</button>
+      </div>
+    </div>
+
+    <div id="pageGrid" class="page-grid"></div>
+
+    <div class="card save-card">
+      <button id="saveBtn" type="button" class="btn btn-primary btn-block">回転して保存</button>
+      <p class="note-small">回転を変更していないページは元のまま保存されます</p>
+    </div>
+  </div>
+
+  <!-- 処理中 -->
+  <div id="processCard" class="card hidden">
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span id="progressText">処理中...</span>
+        <span id="progressPct">0%</span>
+      </div>
+      <div id="progressContainer">
+        <div id="progressBar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 完了 -->
+  <div id="resultCard" class="card hidden">
+    <div class="complete-banner">
+      <span class="complete-icon">&#10003;</span>
+      <span>回転が完了しました！</span>
+    </div>
+    <a id="downloadBtn" class="btn btn-success btn-block" style="margin-bottom:14px;">
+      回転済みPDFをダウンロード
+    </a>
+    <p class="note-small">※ページを閉じると変換データは自動的に消去されます</p>
+    <div class="result-actions">
+      <button id="resetBtn" type="button" class="btn btn-ghost">別のPDFを回転する</button>
+    </div>
+  </div>
+
+  <div class="ad-slot ad-middle" aria-hidden="true"></div>
+
+  <section class="about-section">
+    <h2>PDF回転とは</h2>
+    <p>PDF回転とは、PDFのページを90°・180°・270°単位で回転させる操作のことです。スキャンした書類が横向きになっていたり、一部のページだけ向きがズレている場合に使われます。</p>
+    <p>このツールはpdf.jsとpdf-libというオープンソースライブラリを使用しており、すべての処理をブラウザ内で行います。PDFファイルはサーバーに送信されません。</p>
+  </section>
+
+  <p class="caution">
+    ※パスワード保護されたPDFは回転できません<br>
+    ※大容量PDFはサムネイル生成に時間がかかる場合があります
+  </p>
+
+  <details class="about-details">
+    <summary>このツールについて</summary>
+    <p><strong>仕組み：</strong>pdf.jsでPDFの各ページをサムネイル表示し、pdf-libで回転角度を設定して保存します。ページごとの個別回転と全ページ一括回転の両方に対応しています。</p>
+    <p><strong>なぜ無料か：</strong>Google AdSenseによる広告収入で運営しています。登録・インストールは一切不要です。</p>
+    <p><strong>処理の仕組み：</strong>すべての処理はブラウザ内で行われます。PDFファイルがサーバーへ送信されることはありません。</p>
+  </details>
+
+  <section class="faq" aria-labelledby="faq-title">
+    <h2 id="faq-title">よくある質問</h2>
+    <div class="faq-item">
+      <button class="faq-q">PDFを回転して保存できますか？</button>
+      <div class="faq-a">はい、回転後にそのまま保存できます。Adobe Acrobat Readerの無料版では回転を保存できませんが、このツールではブラウザ内で回転処理を行い、回転済みのPDFをダウンロードできます。</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">PDF回転は無料で使えますか？</button>
+      <div class="faq-a">はい、完全無料です。ページ数・回数の制限はなく、アカウント登録も不要です。</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">1ページだけ回転できますか？</button>
+      <div class="faq-a">はい、ページごとに個別に回転角度を設定できます。特定のページだけ向きを変えることが可能です。</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">PDFの向きを変えて保存する方法は？</button>
+      <div class="faq-a">①PDFファイルを選択②サムネイル一覧で各ページの回転ボタンを押す③「回転して保存」ボタンをクリック、の3ステップで向きを変えて保存できます。</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">180°・270°回転はできますか？</button>
+      <div class="faq-a">はい、90°単位で回転できます。左右どちらかのボタンを2回押すと180°、3回押すと270°回転できます。</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">PDFはサーバーに送られますか？</button>
+      <div class="faq-a">送られません。すべての処理はブラウザ内で完結します。PDFファイルが外部サーバーに送信されることはありません。</div>
+    </div>
+  </section>
+
+  <section class="related-tools" aria-labelledby="related-title">
+    <h2 id="related-title">関連ツール</h2>
+    <div class="related-grid">
+      <a class="related-card" href="/tools/pdf-compress/">PDF<br>圧縮</a>
+      <a class="related-card" href="/tools/pdf-merge/">PDF<br>結合</a>
+      <a class="related-card" href="/tools/pdf-to-jpeg/">PDF→<br>画像変換</a>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer" class="site-footer"></footer>
+<script src="/shared/common.js" defer></script>
+<script>
+(function() {
+'use strict';
+
+var PDFDocument = PDFLib.PDFDocument;
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+  'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+var pdfBytes = null;
+var pdfJsDoc = null;
+var pageCount = 0;
+var rotations = [];
+var renderTokens = [];
+var resultUrl = null;
+var originalFileName = '';
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+function show(id) { document.getElementById(id).classList.remove('hidden'); }
+function hide(id) { document.getElementById(id).classList.add('hidden'); }
+
+function setLoading(pct, text) {
+  document.getElementById('loadingBar').style.width = pct + '%';
+  document.getElementById('loadingPct').textContent = pct + '%';
+  document.getElementById('loadingText').textContent = text;
+}
+
+function setProgress(pct, text) {
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressPct').textContent = pct + '%';
+  document.getElementById('progressText').textContent = text;
+}
+
+// セマフォ（同時レンダリング制限）
+function makeSemaphore(limit) {
+  var running = 0;
+  var queue = [];
+  return function acquire() {
+    return new Promise(function(resolve) {
+      function tryRun() {
+        if (running < limit) {
+          running++;
+          resolve(function() { running--; if (queue.length) queue.shift()(); });
+        } else {
+          queue.push(tryRun);
+        }
+      }
+      tryRun();
+    });
+  };
+}
+
+var acquireRenderSlot = makeSemaphore(2);
+
+// ファイル選択
+document.getElementById('fileButton').addEventListener('click', function(e) {
+  e.stopPropagation();
+  document.getElementById('fileInput').click();
+});
+
+document.getElementById('dropArea').addEventListener('click', function(e) {
+  if (e.target !== document.getElementById('fileButton')) {
+    document.getElementById('fileInput').click();
+  }
+});
+
+document.getElementById('fileInput').addEventListener('change', function() {
+  if (this.files.length) handleFile(this.files[0]);
+  this.value = '';
+});
+
+// ドラッグ＆ドロップ
+var dropArea = document.getElementById('dropArea');
+dropArea.addEventListener('dragover', function(e) {
+  e.preventDefault();
+  dropArea.classList.add('dragover');
+});
+dropArea.addEventListener('dragleave', function() { dropArea.classList.remove('dragover'); });
+dropArea.addEventListener('drop', function(e) {
+  e.preventDefault();
+  dropArea.classList.remove('dragover');
+  var f = e.dataTransfer.files[0];
+  if (f) handleFile(f);
+});
+
+// ファイル読み込み
+async function handleFile(file) {
+  if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
+    alert('PDFファイルを選択してください。');
+    return;
+  }
+
+  originalFileName = file.name;
+  hide('uploadCard');
+  show('loadingCard');
+  setLoading(0, 'PDF読み込み中...');
+
+  try {
+    pdfBytes = new Uint8Array(await file.arrayBuffer());
+    document.getElementById('fileNameLabel').textContent = esc(file.name);
+
+    var pdfLibDoc = await PDFDocument.load(pdfBytes.slice(0));
+    pageCount = pdfLibDoc.getPageCount();
+    rotations = new Array(pageCount).fill(0);
+    renderTokens = new Array(pageCount).fill(0);
+    document.getElementById('pageCountLabel').textContent = pageCount + 'ページ';
+
+    setLoading(20, 'サムネイル準備中...');
+
+    pdfJsDoc = await pdfjsLib.getDocument({
+      data: pdfBytes.slice(0),
+      cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/cmaps/',
+      cMapPacked: true
+    }).promise;
+
+    hide('loadingCard');
+    buildPageGrid();
+    show('pagesCard');
+    renderAllThumbnails();
+
+  } catch (err) {
+    console.error(err);
+    hide('loadingCard');
+    show('uploadCard');
+    alert('PDFの読み込みに失敗しました。\nパスワード保護されたPDFは対応していません。');
+  }
+}
+
+// ページグリッド構築
+function buildPageGrid() {
+  var grid = document.getElementById('pageGrid');
+  grid.innerHTML = '';
+  for (var i = 0; i < pageCount; i++) {
+    grid.appendChild(createPageCard(i));
+  }
+}
+
+function createPageCard(i) {
+  var card = document.createElement('div');
+  card.className = 'page-card';
+  card.id = 'card-' + i;
+
+  var thumbBox = document.createElement('div');
+  thumbBox.className = 'thumb-box';
+
+  var canvasWrap = document.createElement('div');
+  canvasWrap.className = 'canvas-wrap';
+  canvasWrap.id = 'cwrap-' + i;
+
+  var spinner = document.createElement('div');
+  spinner.className = 'thumb-spinner';
+  spinner.textContent = '読込中';
+  spinner.id = 'spinner-' + i;
+
+  var canvas = document.createElement('canvas');
+  canvas.className = 'page-canvas';
+  canvas.id = 'canvas-' + i;
+  canvas.style.display = 'none';
+
+  canvasWrap.appendChild(spinner);
+  canvasWrap.appendChild(canvas);
+  thumbBox.appendChild(canvasWrap);
+
+  var info = document.createElement('div');
+  info.className = 'page-info';
+
+  var pageNum = document.createElement('div');
+  pageNum.className = 'page-num';
+  pageNum.textContent = (i + 1) + ' / ' + pageCount;
+
+  var rotIndicator = document.createElement('div');
+  rotIndicator.className = 'rot-indicator';
+  rotIndicator.id = 'rot-' + i;
+  rotIndicator.textContent = '—';
+
+  var pageBtns = document.createElement('div');
+  pageBtns.className = 'page-btns';
+
+  var leftBtn = document.createElement('button');
+  leftBtn.className = 'page-btn';
+  leftBtn.title = '左90°回転';
+  leftBtn.textContent = '↺';
+  leftBtn.addEventListener('click', (function(idx) {
+    return function() { rotatePage(idx, -90); };
+  })(i));
+
+  var rightBtn = document.createElement('button');
+  rightBtn.className = 'page-btn';
+  rightBtn.title = '右90°回転';
+  rightBtn.textContent = '↻';
+  rightBtn.addEventListener('click', (function(idx) {
+    return function() { rotatePage(idx, 90); };
+  })(i));
+
+  pageBtns.appendChild(leftBtn);
+  pageBtns.appendChild(rightBtn);
+
+  info.appendChild(pageNum);
+  info.appendChild(rotIndicator);
+  info.appendChild(pageBtns);
+
+  card.appendChild(thumbBox);
+  card.appendChild(info);
+  return card;
+}
+
+// サムネイル描画
+async function renderAllThumbnails() {
+  var tasks = [];
+  for (var i = 0; i < pageCount; i++) {
+    tasks.push(renderThumbnail(i));
+  }
+  await Promise.all(tasks);
+}
+
+async function renderThumbnail(idx) {
+  var token = ++renderTokens[idx];
+  var release = await acquireRenderSlot();
+  try {
+    if (renderTokens[idx] !== token) return;
+
+    var page = await pdfJsDoc.getPage(idx + 1);
+    if (renderTokens[idx] !== token) { page.cleanup(); return; }
+
+    var totalRot = (page.rotate + rotations[idx]) % 360;
+    var baseVp = page.getViewport({ scale: 1.0, rotation: totalRot });
+    var scale = Math.min(260 / baseVp.width, 360 / baseVp.height);
+    var vp = page.getViewport({ scale: scale, rotation: totalRot });
+
+    var canvas = document.getElementById('canvas-' + idx);
+    if (!canvas) { page.cleanup(); return; }
+    canvas.width = vp.width;
+    canvas.height = vp.height;
+
+    var renderTask = page.render({ canvasContext: canvas.getContext('2d'), viewport: vp });
+    await renderTask.promise;
+    page.cleanup();
+
+    if (renderTokens[idx] !== token) return;
+
+    var spinner = document.getElementById('spinner-' + idx);
+    if (spinner) spinner.remove();
+    canvas.style.display = 'block';
+
+    await new Promise(function(r) { setTimeout(r, 0); });
+  } catch (err) {
+    if (err && err.name !== 'RenderingCancelledException') {
+      var spinnerEl = document.getElementById('spinner-' + idx);
+      if (spinnerEl) spinnerEl.textContent = '—';
+    }
+  } finally {
+    release();
+  }
+}
+
+// 回転操作
+function rotatePage(idx, delta) {
+  rotations[idx] = ((rotations[idx] + delta) % 360 + 360) % 360;
+  updateCardVisual(idx);
+  renderThumbnail(idx);
+}
+
+function updateCardVisual(i) {
+  var r = rotations[i];
+  var card = document.getElementById('card-' + i);
+  var rotInd = document.getElementById('rot-' + i);
+
+  if (r === 0) {
+    rotInd.textContent = '—';
+    card.classList.remove('rotated');
+  } else {
+    rotInd.textContent = '+' + r + '°';
+    card.classList.add('rotated');
+  }
+}
+
+// 全ページ一括回転
+document.getElementById('rotateAllLeft').addEventListener('click', function() {
+  for (var i = 0; i < pageCount; i++) rotatePage(i, -90);
+});
+
+document.getElementById('rotateAllRight').addEventListener('click', function() {
+  for (var i = 0; i < pageCount; i++) rotatePage(i, 90);
+});
+
+// 保存
+document.getElementById('saveBtn').addEventListener('click', savePDF);
+
+async function savePDF() {
+  hide('pagesCard');
+  show('processCard');
+  setProgress(0, '処理中...');
+
+  try {
+    var pdfDoc = await PDFDocument.load(pdfBytes.slice(0));
+    var pages = pdfDoc.getPages();
+
+    for (var i = 0; i < pages.length; i++) {
+      if (rotations[i] !== 0) {
+        var current = pages[i].getRotation().angle;
+        var newAngle = (current + rotations[i]) % 360;
+        pages[i].setRotation(PDFLib.degrees(newAngle));
+      }
+      setProgress(Math.round(((i + 1) / pages.length) * 90),
+        (i + 1) + ' / ' + pages.length + ' ページ処理中...');
+    }
+
+    setProgress(95, '保存中...');
+    var saved = await pdfDoc.save();
+    setProgress(100, '完了');
+
+    if (resultUrl) URL.revokeObjectURL(resultUrl);
+    var blob = new Blob([saved], { type: 'application/pdf' });
+    resultUrl = URL.createObjectURL(blob);
+
+    var dlBtn = document.getElementById('downloadBtn');
+    dlBtn.href = resultUrl;
+    dlBtn.download = originalFileName.replace(/\.pdf$/i, '_rotated.pdf');
+
+    hide('processCard');
+    show('resultCard');
+  } catch (err) {
+    console.error(err);
+    hide('processCard');
+    show('pagesCard');
+    alert('保存に失敗しました。');
+  }
+}
+
+// リセット
+document.getElementById('resetBtn').addEventListener('click', function() {
+  pdfBytes = null;
+  pdfJsDoc = null;
+  pageCount = 0;
+  rotations = [];
+  renderTokens = [];
+  originalFileName = '';
+  if (resultUrl) { URL.revokeObjectURL(resultUrl); resultUrl = null; }
+  document.getElementById('pageGrid').innerHTML = '';
+  hide('resultCard');
+  hide('pagesCard');
+  hide('processCard');
+  hide('loadingCard');
+  show('uploadCard');
+  setProgress(0, '');
+});
+})();
+</script>
+</body>
+</html>
