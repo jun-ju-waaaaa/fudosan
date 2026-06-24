@@ -702,6 +702,14 @@ const { PDFDocument } = PDFLib;
 let isCanceled = false;
 const isMobile = window.innerWidth < 768;
 
+function trackDownloadEvent(fileName) {
+  var preset = document.querySelector("input[name='qualityPreset']:checked");
+  gtag('event', 'download_pdf', {
+    file_name: fileName,
+    quality_preset: preset ? preset.value : 'unknown'
+  });
+}
+
 function dataURLToUint8Array(dataURL) {
   const base64 = dataURL.split(',')[1];
   const binary = atob(base64);
@@ -887,9 +895,11 @@ async function handleMultiple(files) {
     saveBtn.textContent = "保存";
     saveBtn.className = "btn btn-success save-btn";
     saveBtn.addEventListener("click", function() {
+      var dlName = file.name.replace(/\.pdf$/i, "_compressed.pdf");
+      trackDownloadEvent(dlName);
       const a = document.createElement("a");
       a.href = url;
-      a.download = file.name.replace(/\.pdf$/i, "_compressed.pdf");
+      a.download = dlName;
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -959,6 +969,10 @@ document.getElementById("cancelBtn").addEventListener("click", function() {
   hideEl("processingSection");
   showEl("cancelMsg");
   setTimeout(function() { hideEl("cancelMsg"); }, 2500);
+});
+
+document.getElementById("download").addEventListener("click", function() {
+  trackDownloadEvent(this.download);
 });
 
 document.getElementById("resetBtn").addEventListener("click", resetUI);
