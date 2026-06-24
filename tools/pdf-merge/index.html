@@ -657,6 +657,7 @@ var PDFDocument = PDFLib.PDFDocument;
 var fileEntries = [];
 var mergedUrl = null;
 var dragIdx = null;
+var mergedFileCount = 0;
 
 function esc(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
@@ -814,6 +815,7 @@ async function mergePDFs() {
     var dlBtn = document.getElementById('downloadBtn');
     dlBtn.href = mergedUrl;
     dlBtn.download = 'merged.pdf';
+    mergedFileCount = fileEntries.length;
 
     hide('processingSection');
     show('resultSection');
@@ -861,6 +863,10 @@ dropArea.addEventListener('drop', function(e) {
 });
 
 document.getElementById('mergeBtn').addEventListener('click', mergePDFs);
+
+document.getElementById('downloadBtn').addEventListener('click', function() {
+  gtag('event', 'download_pdf_merged', { file_count: mergedFileCount });
+});
 
 document.getElementById('resetBtn').addEventListener('click', function() {
   fileEntries = [];
