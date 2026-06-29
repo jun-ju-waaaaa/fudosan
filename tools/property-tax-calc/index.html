@@ -1238,8 +1238,8 @@
 
     function splitAmt(annual) {
       if (!annual) return { seller: 0, buyer: 0 };
-      var s = Math.floor(sellerDays * annual / totalDays);
-      var b = Math.floor(buyerDays  * annual / totalDays);
+      var s = Math.round(sellerDays * annual / totalDays);
+      var b = Math.round(buyerDays  * annual / totalDays);
       return { seller: s, buyer: b + (annual - s - b) };
     }
 
