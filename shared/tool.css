@@ -381,3 +381,26 @@
 .related-card:hover { transform: translateY(-2px); }
 
 @media (prefers-color-scheme: dark) { .related-card { color: var(--clr-primary-dark); } }
+
+/* =============================================
+   アフィリエイトCTA
+   ============================================= */
+.affiliate-cta {
+  margin: 1.5rem 0 2rem;
+  padding: 1.25rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  text-align: center;
+  background: #fafafa;
+}
+.affiliate-cta__label {
+  font-size: 0.7rem;
+  color: #999;
+  text-align: left;
+  margin: 0 0 0.5rem;
+}
+.affiliate-cta__text {
+  font-size: 0.9rem;
+  color: #333;
+  margin: 0 0 1rem;
+}
